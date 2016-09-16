@@ -1,0 +1,897 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|Menlo:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+  
+
+<link href="http://cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="fonts,翻译," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="var {color: #ec407a;       font-weight: bold;}原文链接： https://developers.google.com/fonts/docs/getting_started
+第一次翻译： 2015/12/17 18:30
+开始这篇文章教你如何使用Google Fonts API来给你的网站添加字体。你不用做任何编码工作，唯一需要做的只是把一条特殊的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Google Fonts API使用教程">
+<meta property="og:url" content="http://blog.jerrywin.com/2015/12/17/google-fonts-api/index.html">
+<meta property="og:site_name" content="/home/jerry">
+<meta property="og:description" content="var {color: #ec407a;       font-weight: bold;}原文链接： https://developers.google.com/fonts/docs/getting_started
+第一次翻译： 2015/12/17 18:30
+开始这篇文章教你如何使用Google Fonts API来给你的网站添加字体。你不用做任何编码工作，唯一需要做的只是把一条特殊的">
+<meta property="og:updated_time" content="2016-09-16T14:49:37.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Google Fonts API使用教程">
+<meta name="twitter:description" content="var {color: #ec407a;       font-weight: bold;}原文链接： https://developers.google.com/fonts/docs/getting_started
+第一次翻译： 2015/12/17 18:30
+开始这篇文章教你如何使用Google Fonts API来给你的网站添加字体。你不用做任何编码工作，唯一需要做的只是把一条特殊的">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://blog.jerrywin.com/2015/12/17/google-fonts-api/"/>
+
+  <title> Google Fonts API使用教程 | /home/jerry </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?ec6f803d26e3885c9a8eb87ca36f0560";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">/home/jerry</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Google Fonts API使用教程
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-12-17T17:13:43+08:00" content="2015-12-17">
+              2015-12-17
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/翻译/" itemprop="url" rel="index">
+                    <span itemprop="name">翻译</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/12/17/google-fonts-api/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/17/google-fonts-api/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><link rel="stylesheet" type="text/css" href="http://fonts.useso.com/css?family=Tangerine"></p>
+<p><link rel="stylesheet" type="text/css" href="http://fonts.useso.com/css?family=Rancho&effect=shadow-multiple"></p>
+<p><link rel="stylesheet" type="text/css" href="http://fonts.useso.com/css?family=Source+Sans+Pro&effect=anaglyph|brick-sign|canvas-print|crackle|decaying|destruction|distressed|distressed-wood|emboss|fire|fire-animation|fragile|grass|ice|mitosis|neon|outline|putting-green|scuffed-steel|shadow-multiple|splintered|static|stonewash|3d|3d-float|vintage|wallpaper"></p>
+<p><style><br>var {<br>color: #ec407a;<br>       font-weight: bold;<br>}<br></style><br>原文链接： <a href="https://developers.google.com/fonts/docs/getting_started" target="_blank" rel="external">https://developers.google.com/fonts/docs/getting_started</a></p>
+<p>第一次翻译： 2015/12/17 18:30</p>
+<h2 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h2><p>这篇文章教你如何使用Google Fonts API来给你的网站添加字体。你不用做任何编码工作，唯一需要做的只是把一条特殊的样式表链接添加至你的HTML文档中，然后再CSS中指定这个字体即可。</p>
+<blockquote>
+<p>注意： <strong>如果你想在国内网站中使用Google Fonts API，请使用360的代理。使用方法：把下文中的fonts.googleapis.com全部更换为fonts.useso.com即可。</strong></p>
+</blockquote>
+<h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><ol>
+<li><a href="#Quick_Example">一个简单的例子</a></li>
+<li><a href="#Overview">概况</a></li>
+<li><a href="#Specify_Font">在样式链接中指定字体的样式</a></li>
+<li><a href="#Specify_Subsets">指定字体子集（Scripts）</a></li>
+<li><a href="#Optimize_Req">优化字体请求（Beta）</a></li>
+<li><a href="#Enable_Effects">启用字体特效（Beta）</a></li>
+<li><a href="#Further_Reading">继续阅读</a></li>
+</ol>
+<a id="more"></a>
+<h2 id="Quick_Example">一个简单的例子</h2>
+
+<p>这是一个简单里例子。复制粘贴下面的代码到HTML文件中:<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">type</span>=<span class="string">"text/css"</span> <span class="attr">href</span>=<span class="string">"http://fonts.googleapis.com/css?family=Tangerine"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="undefined"></span></div><div class="line">              body &#123;</div><div class="line">                font-family: 'Tangerine', serif;</div><div class="line">                font-size: 48px;</div><div class="line">              &#125;</div><div class="line">        <span class="tag">&lt;/<span class="name">style</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">div</span>&gt;</span>Making the Web Beautiful!<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">          <span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line">          <span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>然后再一个现代浏览器中打开这个文件，你会看到一行<code>Tangerine</code>字体的字：</p>
+<p></p><p style="font-family: 'Tangerine', serif; font-size: 48px; margin-top: 20px;">Making the Web Beautiful</p><br>这句话是普通的文本，所以你可以通过改变CSS来改变它的样子。试着给它加上点阴影：<p></p>
+<pre> <code class="prettyprint lang-css">body {
+font-family: 'Tangerine', serif;
+font-size: 48px;
+<strong>text-shadow: 4px 4px 4px #aaa;</strong>
+}</code>
+</pre>
+你会看见一些阴影在这行字下面：
+<p style="font-family: 'Tangerine', serif; font-size: 48px; margin-top: 20px;text-shadow: 4px 4px 4px #aaa;">Making the Web Beautiful</p>
+这仅仅是你能使用Google Fonts API做到的事中的很小一部分。
+
+<h2 id="Overview">概况</h2>
+仅仅两步你就可以开始使用Google Fonts API了：
+
+1. 把你想要的字体的样式链接加入到HTML文件中：
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">type</span>=<span class="string">"text/css"</span> <span class="attr">href</span>=<span class="string">"http://fonts.googleapis.com/css?family=Font+Name"</span>&gt;</span></div></pre></td></tr></table></figure>
+
+2. 在CSS文件中使用字体：
+<pre><code class="prettyprint lang-css"><var>CSS selector</var> {
+      font-family: '<var>Font Name</var>', serif;
+}</code>
+</pre>或者内嵌使用：
+<pre> <code class="prettyprint lang-html">&lt;div style="font-family: '<var>Font Name</var>', serif;"&gt;<var>Your text</var>&lt;/div&gt;</code></pre>
+
+<blockquote>
+<p>注意： 每次指定字体样式时，至少加上一个Web安全字体再最后来防止发生未定义的行为。特别地，加入一个CSS通用的字体名称如：<code>serif</code>或者<code>sans-serif</code>在<code>font-family</code>的最后，这样浏览器在必要的情况下会使用这些通用字体。</p>
+</blockquote>
+<p>字体列表可以在 <a href="https://www.google.com/fonts" target="_blank" rel="external">Google Fonts</a>里找到。（需翻墙）</p>
+<p></p><h2 id="Specify_Font">在样式链接中指定字体的样式</h2><br>要决定样式链接，得从Google Fonts API根URL开始：<br><code>https://fonts.googleapis.com/css</code><p></p>
+<p>然后在后面增加<code>family=URL</code>的参数，URL可以为一个或多个字体的名字。<br>比如，要使用<a href="http://www.google.com/specimen/Inconsolata" target="_blank" rel="external"><code>Inconsolata</code></a>字体：</p>
+<p><code>http://fonts.googleapis.com/css?family=Inconsolata</code></p>
+<blockquote>
+<p>注意： 字体名字里的空格都用<code>+</code>号代替。</p>
+</blockquote>
+<p>使用多个字体，用<code>|</code>符号来分隔字体。<br>比如，要使用<a href="http://www.google.com/specimen/Tangerine" target="_blank" rel="external"><code>Tangerine</code></a>,<a href="http://www.google.com/specimen/Inconsolata" target="_blank" rel="external"><code>Inconsolata</code></a>和<a href="http://www.google.com/specimen/Droid+Sans" target="_blank" rel="external"><code>Droid Sans</code></a>：</p>
+<p><code>http://fonts.google.com/css?family=Tangerine|Inconsolata|Droid+Sans</code></p>
+<p>这个请求允许你可以在页面中同时使用所有字体。（但是不要一次请求太多字体，大多数页面不需要这么多的字体，而且一次性请求多个字体会使页面加载变得很慢。）<br>Google Fonts API默认提供所请求字体的普通样式。需要指定请求字体的样式的话，要在字体后加<code>:</code>符号并且不同样式以<code>,</code>符号分隔表明。<br>比如：</p>
+<p><code>http://fonts.googleapis.com/css?family=Tangerine:bold,bolditalic|Inconsolata:italic|Droid+Sans</code></p>
+<p>想知道请求的字体提供哪些样式供选择，可以在<a href="https://www.google.com/fonts" target="_blank" rel="external">Google Fonts</a>页面查询。<br>对于每个请求的样式，既可以使用全名也可以使用简称。对于<code>weight</code>来说，你也可以用一个数值来指定：</p>
+<table><br><tr><br><th><strong>Style</strong></th><th><strong>Specifiers</strong></th><br></tr><br><tr><td>italic</td><td>italic 或者 i</td></tr><br><tr><td>bold</td><td>bold 或者 b 或者一个数值： 700</td></tr><br><tr><td>bold italic</td><td>bolditalic 或者 bi</td></tr><br></table><br>比如： 要请求Cantarell italic和Droid Serif bold字体，你可以使用下面任意一个样式链接：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">http://fonts.googleapis.com/css?family=Cantarell:italic|Droid+Serif:bold</div><div class="line">http://fonts.googleapis.com/css?family=Cantarell:i|Droid+Serif:b</div><div class="line">http://fonts.googleapis.com/css?family=Cantarell:i|Droid+Serif:700</div></pre></td></tr></table></figure><br><br><h2 id="Specify_Subsets">指定字体子集（Scripts）</h2><br>一些<a href="https://www.google.com/fonts" target="_blank" rel="external">Google Font目录</a>中字体支持多种格式(比如：Latin, Cyrillic和Greek)。为了指定使用哪一个子集，需要添加一个subset参数。<br>比如：请求<a href="http://www.google.com/fonts/specimen/Roboto+Mono" target="_blank" rel="external"><code>Roboto Mono</code></a>的Cyrllic子集，需要使用如下URL：<br><br><code>http://fonts.googleapis.com/css?family=Roboto+Mono&amp;subset=cyrillic</code><br><br>若请求<a href="http://www.google.com/fonts/specimen/Roboto+Mono" target="_blank" rel="external"><code>Roboto Mono</code></a>的Greek子集，需要使用如下URL：<br><br><code>http://fonts.googleapis.com/css?family=Roboto+Mono&amp;subset=greek</code><br><br>若请求<a href="http://www.google.com/fonts/specimen/Roboto+Mono" target="_blank" rel="external"><code>Roboto Mono</code></a>的Greek和Cyrillic子集，需要使用如下URL：<br><br><code>http://fonts.googleapis.com/css?family=Roboto+Mono&amp;subset=greek,cyrillic</code><br><br>如果Latin子集存在的话，那么它总是会被默认包含在请求中，所以没有必要特意在URL中指定。请注意客户端浏览器是否支持子集的unicode范围，浏览器会在字体的子集中选择自己支持的来渲染。<br>完整的子集列表，请在<a href="https://www.google.com/fonts" target="_blank" rel="external">Google Fonts</a>页面中查询。<br><br><h2 id="Optimize_Req">优化字体请求（Beta）</h2><br>大多数情况下，当你想在你的网站或者应用中使用其它字体时，你之前就知道你会使用哪些字母。这通常发生在，你想在Logo或者标题中使用其它字体的时候。<br>这种情况下，你可以考虑使用<code>text=value</code>参数。这允许Google给你返回一个优化后的字体文件。在一些情况中，这可以减少字体文件约90%的大小。<br>使用这个beta特性，只要简单地在URL请求中加入<code>text=</code>参数即可。比如：你只需要在博客标题中使用Inconsolata字体，你可以把标题本身当作参数<code>text=</code>的值加入URL中。如果你的标题是Hello:<br><br><code>http://fonts.googleapis.com/css?family=Inconsolata&amp;text=Hello</code><br>向通常的URL链接一下，你需要URL编码这个值：<br><br><code>http://fonts.googleapis.com/css?family=Inconsolata&amp;text=Hello%20World</code><br>这个特性也可以使用在其它语言的字体中，允许制定UTF-8字符。比如，¡Hola!编码为：<br><br><code>http://fonts.googleapis.com/css?family=Inconsolata&amp;text=%c2%a1Hola!</code><br>&gt; 注意： 当用了<code>text=</code>参数的时候，就没有必要使用<code>subset=</code>参数了，因为它已经允许你指定字体当中的任意字符了。<br><br><h2 id="Enable_Effects">启用字体特效（Beta）</h2><br>当写标题或者展示一些文字的时候，你经常会想要有一些花哨的字体特效。为了简化你的工作，Google提供了一系列的字体特效来让你轻易地实现你要的效果。比如：<br><div class="font-effect-shadow-multiple" style="font-family:Rancho; font-size: 72px; text-align: center;">This is a font effect!</div><br><br>要使用这个beta特性，只要在样式链接中加入<code>effect=</code>参数，然后再对应的HTML元素中指定class为对应名称即可。在我们上面的例子中，我们使用了<code>shadow-multiple</code>字体特效，所以请求链接会向这样：<br><br><code>http://fonts.googleapis.com/css?family=Rancho&amp;effect=shadow-multiple</code><br><br>要使用这个特效，在相应的HTML元素上把class制定为<code>font-effect-shadow-multiple</code>（前缀为<code>font-effect-</code>）：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"font-effect-shadow-multiple"</span>&gt;</span>This is a font effect!<span class="tag">&lt;<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure><br><br>你可以请求多个特效，使用<code>|</code>符号来分隔。<br><br><code>http://fonts.googleapis.com/css?family=Rancho&amp;effect=shadow-multiple|3d-float</code><br><br>下面是我们提供特效的完整列表：<br><style><br>  .effects-table td:first-child {<br>          font-family: Source Sans Pro;<br>              font-size: 40px;<br>                  font-weight: 900;<br>                      line-height: 56px;<br>                          background-color: #ebebeb;<br>                            }<br></style><br><table class="effects-table"><br>  <tr><br>      <th>效果</th><br>          <th>API名称</th><br>              <th>Class名称</th><br>                  <th>支持</th><br>                    </tr><br>                      <tr><br>                          <td><span class="font-effect-anaglyph">Anaglyph</span></td><br>                              <td><code>anaglyph</code></td><br>                                  <td><code>font-effect-anaglyph</code></td><br>                                      <td>Chrome, Firefox, Opera, Safari</td><br>                                        </tr><br>                                          <tr><br>                                              <td><span class="font-effect-brick-sign">Brick Sign</span></td><br>                                                  <td><code>brick-sign</code></td><br>                                                      <td><code>font-effect-brick-sign</code></td><br>                                                          <td>Chrome, Safari</td><br>                                                            </tr><br>                                                              <tr><br>                                                                  <td><span class="font-effect-canvas-print">Canvas Print</span></td><br>                                                                      <td><code>canvas-print</code></td><br>                                                                          <td><code>font-effect-canvas-print</code></td><br>                                                                              <td>Chrome, Safari</td><br>                                                                                </tr><br>                                                                                  <tr><br>                                                                                      <td><span class="font-effect-crackle">Crackle</span></td><br>                                                                                          <td><code>crackle</code></td><br>                                                                                              <td><code>font-effect-crackle</code></td><br>                                                                                                  <td>Chrome, Safari</td><br>                                                                                                    </tr><br>                                                                                                      <tr><br>                                                                                                          <td><span class="font-effect-decaying">Decaying</span></td><br>                                                                                                              <td><code>decaying</code></td><br>                                                                                                                  <td><code>font-effect-decaying</code></td><br>                                                                                                                      <td>Chrome, Safari</td><br>                                                                                                                        </tr><br>                                                                                                                          <tr><br>                                                                                                                              <td><span class="font-effect-destruction">Destruction</span></td><br>                                                                                                                                  <td><code>destruction</code></td><br>                                                                                                                                      <td><code>font-effect-destruction</code></td><br>                                                                                                                                          <td>Chrome, Safari</td><br>                                                                                                                                            </tr><br>                                                                                                                                              <tr><br>                                                                                                                                                  <td><span class="font-effect-distressed">Distressed</span></td><br>                                                                                                                                                      <td><code>distressed</code></td><br>                                                                                                                                                          <td><code>font-effect-distressed</code></td><br>                                                                                                                                                              <td>Chrome, Safari</td><br>                                                                                                                                                                </tr><br>                                                                                                                                                                  <tr><br>                                                                                                                                                                      <td><span class="font-effect-distressed-wood">Distressed Wood</span></td><br>                                                                                                                                                                          <td><code>distressed-wood</code></td><br>                                                                                                                                                                              <td><code>font-effect-distressed-wood</code></td><br>                                                                                                                                                                                  <td>Chrome, Safari</td><br>                                                                                                                                                                                    </tr><br>                                                                                                                                                                                      <tr><br>                                                                                                                                                                                          <td><span class="font-effect-emboss">Emboss</span></td><br>                                                                                                                                                                                              <td><code>emboss</code></td><br>                                                                                                                                                                                                  <td><code>font-effect-emboss</code></td><br>                                                                                                                                                                                                      <td>Chrome, Firefox, Opera, Safari</td><br>                                                                                                                                                                                                        </tr><br>                                                                                                                                                                                                          <tr><br>                                                                                                                                                                                                              <td><span class="font-effect-fire">Fire</span></td><br>                                                                                                                                                                                                                  <td><code>fire</code></td><br>                                                                                                                                                                                                                      <td><code>font-effect-fire</code></td><br>                                                                                                                                                                                                                          <td>Chrome, Firefox, Opera, Safari</td><br>                                                                                                                                                                                                                            </tr><br>                                                                                                                                                                                                                              <tr><br>                                                                                                                                                                                                                                  <td><span class="font-effect-fire-animation">Fire Animation</span></td><br>                                                                                                                                                                                                                                      <td><code>fire-animation</code></td><br>                                                                                                                                                                                                                                          <td><code>font-effect-fire-animation</code></td><br>                                                                                                                                                                                                                                              <td>Chrome, Firefox, Opera, Safari</td><br>                                                                                                                                                                                                                                                </tr><br>                                                                                                                                                                                                                                                  <tr><br>                                                                                                                                                                                                                                                      <td><span class="font-effect-fragile">Fragile</span></td><br>                                                                                                                                                                                                                                                          <td><code>fragile</code></td><br>                                                                                                                                                                                                                                                              <td><code>font-effect-fragile</code></td><br>                                                                                                                                                                                                                                                                  <td>Chrome, Safari</td><br>                                                                                                                                                                                                                                                                    </tr><br>                                                                                                                                                                                                                                                                      <tr><br>                                                                                                                                                                                                                                                                          <td><span class="font-effect-grass">Grass</span></td><br>                                                                                                                                                                                                                                                                              <td><code>grass</code></td><br>                                                                                                                                                                                                                                                                                  <td><code>font-effect-grass</code></td><br>                                                                                                                                                                                                                                                                                      <td>Chrome, Safari</td><br>                                                                                                                                                                                                                                                                                        </tr><br>                                                                                                                                                                                                                                                                                          <tr><br>                                                                                                                                                                                                                                                                                              <td><span class="font-effect-ice">Ice</span></td><br>                                                                                                                                                                                                                                                                                                  <td><code>ice</code></td><br>                                                                                                                                                                                                                                                                                                      <td><code>font-effect-ice</code></td><br>                                                                                                                                                                                                                                                                                                          <td>Chrome, Safari</td><br>                                                                                                                                                                                                                                                                                                            </tr><br>                                                                                                                                                                                                                                                                                                              <tr><br>                                                                                                                                                                                                                                                                                                                  <td><span class="font-effect-mitosis">Mitosis</span></td><br>                                                                                                                                                                                                                                                                                                                      <td><code>mitosis</code></td><br>                                                                                                                                                                                                                                                                                                                          <td><code>font-effect-mitosis</code></td><br>                                                                                                                                                                                                                                                                                                                              <td>Chrome, Safari</td><br>                                                                                                                                                                                                                                                                                                                                </tr><br>                                                                                                                                                                                                                                                                                                                                  <tr><br>                                                                                                                                                                                                                                                                                                                                      <td><span class="font-effect-neon">Neon</span></td><br>                                                                                                                                                                                                                                                                                                                                          <td><code>neon</code></td><br>                                                                                                                                                                                                                                                                                                                                              <td><code>font-effect-neon</code></td><br>                                                                                                                                                                                                                                                                                                                                                  <td>Chrome, Firefox, Opera, Safari</td><br>                                                                                                                                                                                                                                                                                                                                                    </tr><br>                                                                                                                                                                                                                                                                                                                                                      <tr><br>                                                                                                                                                                                                                                                                                                                                                          <td><span class="font-effect-outline">Outline</span></td><br>                                                                                                                                                                                                                                                                                                                                                              <td><code>outline</code></td><br>                                                                                                                                                                                                                                                                                                                                                                  <td><code>font-effect-outline</code></td><br>                                                                                                                                                                                                                                                                                                                                                                      <td>Chrome, Firefox, Opera, Safari</td><br>                                                                                                                                                                                                                                                                                                                                                                        </tr><br>                                                                                                                                                                                                                                                                                                                                                                          <tr><br>                                                                                                                                                                                                                                                                                                                                                                              <td><span class="font-effect-putting-green">Putting Green</span></td><br>                                                                                                                                                                                                                                                                                                                                                                                  <td><code>putting-green</code></td><br>                                                                                                                                                                                                                                                                                                                                                                                      <td><code>font-effect-putting-green</code></td><br>                                                                                                                                                                                                                                                                                                                                                                                          <td>Chrome, Safari</td><br>                                                                                                                                                                                                                                                                                                                                                                                            </tr><br>                                                                                                                                                                                                                                                                                                                                                                                              <tr><br>                                                                                                                                                                                                                                                                                                                                                                                                  <td><span class="font-effect-scuffed-steel">Scuffed Steel</span></td><br>                                                                                                                                                                                                                                                                                                                                                                                                      <td><code>scuffed-steel</code></td><br>                                                                                                                                                                                                                                                                                                                                                                                                          <td><code>font-effect-scuffed-steel</code></td><br>                                                                                                                                                                                                                                                                                                                                                                                                              <td>Chrome, Safari</td><br>                                                                                                                                                                                                                                                                                                                                                                                                                </tr><br>                                                                                                                                                                                                                                                                                                                                                                                                                  <tr><br>                                                                                                                                                                                                                                                                                                                                                                                                                      <td><span class="font-effect-shadow-multiple">Shadow Multiple</span></td><br>                                                                                                                                                                                                                                                                                                                                                                                                                          <td><code>shadow-multiple</code></td><br>                                                                                                                                                                                                                                                                                                                                                                                                                              <td><code>font-effect-shadow-multiple</code></td><br>                                                                                                                                                                                                                                                                                                                                                                                                                                  <td>Chrome, Firefox, Opera, Safari</td><br>                                                                                                                                                                                                                                                                                                                                                                                                                                    </tr><br>                                                                                                                                                                                                                                                                                                                                                                                                                                      <tr><br>                                                                                                                                                                                                                                                                                                                                                                                                                                          <td><span class="font-effect-splintered">Splintered</span></td><br>                                                                                                                                                                                                                                                                                                                                                                                                                                              <td><code>splintered</code></td><br>                                                                                                                                                                                                                                                                                                                                                                                                                                                  <td><code>font-effect-splintered</code></td><br>                                                                                                                                                                                                                                                                                                                                                                                                                                                      <td>Chrome, Safari</td><br>                                                                                                                                                                                                                                                                                                                                                                                                                                                        </tr><br>                                                                                                                                                                                                                                                                                                                                                                                                                                                          <tr><br>                                                                                                                                                                                                                                                                                                                                                                                                                                                              <td><span class="font-effect-static">Static</span></td><br>                                                                                                                                                                                                                                                                                                                                                                                                                                                                  <td><code>static</code></td><br>                                                                                                                                                                                                                                                                                                                                                                                                                                                                      <td><code>font-effect-static</code></td><br>                                                                                                                                                                                                                                                                                                                                                                                                                                                                          <td>Chrome, Safari</td><br>                                                                                                                                                                                                                                                                                                                                                                                                                                                                            </tr><br>                                                                                                                                                                                                                                                                                                                                                                                                                                                                              <tr><br>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  <td><span class="font-effect-stonewash">Stonewash</span></td><br>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      <td><code>stonewash</code></td><br>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          <td><code>font-effect-stonewash</code></td><br>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              <td>Chrome, Safari</td><br>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </tr><br>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  <tr><br>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      <td><span class="font-effect-3d">Three Dimensional</span></td><br>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          <td><code>3d</code></td><br>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              <td><code>font-effect-3d</code></td><br>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  <td>Chrome, Firefox, Opera, Safari</td><br>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </tr><br>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      <tr><br>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          <td><span class="font-effect-3d-float">Three Dimensional Float</span></td><br>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              <td><code>3d-float</code></td><br>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  <td><code>font-effect-3d-float</code></td><br>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      <td>Chrome, Firefox, Opera, Safari</td><br>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </tr><br>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          <tr><br>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              <td><span class="font-effect-vintage">Vintage</span></td><br>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  <td><code>vintage</code></td><br>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      <td><code>font-effect-vintage</code></td><br>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          <td>Chrome, Safari</td><br>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            </tr><br>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              <tr><br>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  <td><span class="font-effect-wallpaper">Wallpaper</span></td><br>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      <td><code>wallpaper</code></td><br>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          <td><code>font-effect-wallpaper</code></td><br>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              <td>Chrome, Safari</td><br>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </tr><br>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </table>
+
+<pre><code>&gt; 注意： 有些字体特效（比如： 3d）对字体大小支持并不是很好，越大的字体看起来效果越好。另外，你可能希望加入更多的特效，比如改变字体颜色来适应页面。
+
+还有很多其它的办法来改变字体样式，很多利用CSS的办法。我们只是提供一些简单的想法来告诉你如何开始。想要更多的样式，请Goolge搜索“[css text effects](https://www.google.com/search?q=css+text+effects)”来查看网络上的其它想法。
+
+&lt;h2 id=&quot;Further_Reading&quot;&gt;继续阅读&lt;/h2&gt;
+- 访问[Google Fonts](https://www.google.com/fonts)页面，查看Google Fonts API提供的全部字体列表
+- 学习使用[Web Font Loader](https://developers.google.com/fonts/docs/webfont_loader)来对导入字体进行更多控制。
+- 访问[Technical Considerations](https://developers.google.com/fonts/docs/technical_considerations)页面，学习更多关于Google Fonts API如何工作。
+</code></pre>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/fonts/" rel="tag">#fonts</a>
+          
+            <a href="/tags/翻译/" rel="tag">#翻译</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/11/04/sqlmap-subprocess/" rel="next" title="从SQLMap踩坑到如何优雅地控制子进程">
+                <i class="fa fa-chevron-left"></i> 从SQLMap踩坑到如何优雅地控制子进程
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/01/12/nupt-lifeanalyzer-2/" rel="prev" title="NuptLifeAnalyzer札记（2）—— Crawlers">
+                NuptLifeAnalyzer札记（2）—— Crawlers <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2015/12/17/google-fonts-api/"
+           data-title="Google Fonts API使用教程" data-url="http://blog.jerrywin.com/2015/12/17/google-fonts-api/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://static.jerrywin.com/img/blog/avatar.jpg"
+               alt="jerrypy" />
+          <p class="site-author-name" itemprop="name">jerrypy</p>
+          <p class="site-description motion-element" itemprop="description">关于时间、距离以及完整。</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">8</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/jerrypy" target="_blank" title="Github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  Github
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#开始"><span class="nav-number">1.</span> <span class="nav-text">开始</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#目录"><span class="nav-number">2.</span> <span class="nav-text">目录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Quick_Example"><span class="nav-number">3.</span> <span class="nav-text">一个简单的例子</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Overview"><span class="nav-number">4.</span> <span class="nav-text">概况</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Specify_Font"><span class="nav-number">5.</span> <span class="nav-text">在样式链接中指定字体的样式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Specify_Subsets"><span class="nav-number">6.</span> <span class="nav-text">指定字体子集（Scripts）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Optimize_Req"><span class="nav-number">7.</span> <span class="nav-text">优化字体请求（Beta）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Enable_Effects"><span class="nav-number">8.</span> <span class="nav-text">启用字体特效（Beta）</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2012 - 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">jerrypy</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"jerrypyblog"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+       search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            isfetched = true;
+            $('.popup').detach().appendTo('.header-inner');
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var matchcounts = 0;
+                var str='<ul class=\"search-result-list\">';
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length > 1) {
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = true;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = data.url;
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '' && data_content != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title < 0 && index_content < 0 ){
+                                isMatch = false;
+                            } else {
+                                if (index_content < 0) {
+                                    index_content = 0;
+                                }
+                                if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            }
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        matchcounts += 1;
+                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out 100 characters
+                            var start = first_occur - 20;
+                            var end = first_occur + 80;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 50;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substring(start, end);
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                            });
+
+                            str += "<p class=\"search-result\">" + match_content +"...</p>"
+                        }
+                        str += "</li>";
+                    }
+                })};
+                str += "</ul>";
+                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+                $resultContent.innerHTML = str;
+            });
+            proceedsearch();
+        }
+    });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+
+  
+
+  
+
+</body>
+</html>

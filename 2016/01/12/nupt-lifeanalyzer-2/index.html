@@ -76,7 +76,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="Python,LifeAnalyzer,NUPT," />
 
 
 
@@ -92,15 +92,19 @@
 
 
 
-<meta name="description" content="关于时间、距离以及完整。">
-<meta property="og:type" content="website">
-<meta property="og:title" content="/home/jerry">
-<meta property="og:url" content="http://blog.jerrywin.com/archives/index.html">
+<meta name="description" content="0x00 序&amp;nbsp;&amp;nbsp;长久的思考后，这个项目终于又重新开始了。我发现写一个较大的程序的时候，很容易迷失在细节的设计中，我想着前端要用什么，会踩什么坑，后端得怎么设计才安全、才高效。经过在公司这么久的实习，慢慢学会了，从整体去思考，可以先让一个最简单的框架跑起来，或者先完成其中一个独立的部分。对于我们这个项目，我决定先搞定它的核心部分–爬虫。
+0x01 考虑学校系统的爬虫，并不像其它博">
+<meta property="og:type" content="article">
+<meta property="og:title" content="NuptLifeAnalyzer札记（2）—— Crawlers">
+<meta property="og:url" content="http://blog.jerrywin.com/2016/01/12/nupt-lifeanalyzer-2/index.html">
 <meta property="og:site_name" content="/home/jerry">
-<meta property="og:description" content="关于时间、距离以及完整。">
+<meta property="og:description" content="0x00 序&amp;nbsp;&amp;nbsp;长久的思考后，这个项目终于又重新开始了。我发现写一个较大的程序的时候，很容易迷失在细节的设计中，我想着前端要用什么，会踩什么坑，后端得怎么设计才安全、才高效。经过在公司这么久的实习，慢慢学会了，从整体去思考，可以先让一个最简单的框架跑起来，或者先完成其中一个独立的部分。对于我们这个项目，我决定先搞定它的核心部分–爬虫。
+0x01 考虑学校系统的爬虫，并不像其它博">
+<meta property="og:updated_time" content="2016-09-16T14:42:06.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="/home/jerry">
-<meta name="twitter:description" content="关于时间、距离以及完整。">
+<meta name="twitter:title" content="NuptLifeAnalyzer札记（2）—— Crawlers">
+<meta name="twitter:description" content="0x00 序&amp;nbsp;&amp;nbsp;长久的思考后，这个项目终于又重新开始了。我发现写一个较大的程序的时候，很容易迷失在细节的设计中，我想着前端要用什么，会踩什么坑，后端得怎么设计才安全、才高效。经过在公司这么久的实习，慢慢学会了，从整体去思考，可以先让一个最简单的框架跑起来，或者先完成其中一个独立的部分。对于我们这个项目，我决定先搞定它的核心部分–爬虫。
+0x01 考虑学校系统的爬虫，并不像其它博">
 
 
 
@@ -121,9 +125,9 @@
 
 
 
-  <link rel="canonical" href="http://blog.jerrywin.com/archives/"/>
+  <link rel="canonical" href="http://blog.jerrywin.com/2016/01/12/nupt-lifeanalyzer-2/"/>
 
-  <title> 归档 | /home/jerry </title>
+  <title> NuptLifeAnalyzer札记（2）—— Crawlers | /home/jerry </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -154,7 +158,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left  page-archive  ">
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -275,335 +279,166 @@
           <div id="content" class="content">
             
 
-  <section id="posts" class="posts-collapse">
-    <span class="archive-move-on"></span>
-
-    <span class="archive-page-counter">
-      
-      
-      
-        
-      
-      嗯..! 目前共计 8 篇日志。 继续努力。
-    </span>
-
+  <div id="posts" class="posts-expand">
     
-
-      
-      
-      
-
-      
-        
-        <div class="collection-title">
-          <h2 class="archive-year motion-element" id="archive-year-2016">2016</h2>
-        </div>
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2016/09/16/why-work-hard/" itemprop="url">
-              
-                <span itemprop="name">为什么要努力？</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-09-16T22:37:26+08:00"
-              content="2016-09-16" >
-          09-16
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2016/01/12/nupt-lifeanalyzer-2/" itemprop="url">
-              
-                <span itemprop="name">NuptLifeAnalyzer札记（2）—— Crawlers</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-01-12T11:13:58+08:00"
-              content="2016-01-12" >
-          01-12
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-      
-      
-      
-
-      
-        
-        <div class="collection-title">
-          <h2 class="archive-year motion-element" id="archive-year-2015">2015</h2>
-        </div>
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2015/12/17/google-fonts-api/" itemprop="url">
-              
-                <span itemprop="name">Google Fonts API使用教程</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2015-12-17T17:13:43+08:00"
-              content="2015-12-17" >
-          12-17
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2015/11/04/sqlmap-subprocess/" itemprop="url">
-              
-                <span itemprop="name">从SQLMap踩坑到如何优雅地控制子进程</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2015-11-04T11:41:45+08:00"
-              content="2015-11-04" >
-          11-04
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2015/11/01/5-years-with-swing/" itemprop="url">
-              
-                <span itemprop="name">五年，你比一辈子少几年？</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2015-11-01T21:44:27+08:00"
-              content="2015-11-01" >
-          11-01
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2015/10/30/lost-qzone/" itemprop="url">
-              
-                <span itemprop="name">眼前的苟且，远方的诗</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2015-10-30T18:37:26+08:00"
-              content="2015-10-30" >
-          10-30
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2015/10/22/nupt-lifeanalyzer-1/" itemprop="url">
-              
-                <span itemprop="name">NuptLifeAnalyzer札记（1）—— Reboot</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2015-10-22T10:26:56+08:00"
-              content="2015-10-22" >
-          10-22
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-      
-      
-      
-
-      
-        
-        <div class="collection-title">
-          <h2 class="archive-year motion-element" id="archive-year-2014">2014</h2>
-        </div>
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2014/12/04/jpype-benchmark/" itemprop="url">
-              
-                <span itemprop="name">jpype性能测试</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2014-12-04T11:46:16+08:00"
-              content="2014-12-04" >
-          12-04
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-  </section>
 
   
+  
 
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                NuptLifeAnalyzer札记（2）—— Crawlers
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-01-12T11:13:58+08:00" content="2016-01-12">
+              2016-01-12
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Python/" itemprop="url" rel="index">
+                    <span itemprop="name">Python</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/01/12/nupt-lifeanalyzer-2/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/01/12/nupt-lifeanalyzer-2/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="0x00-序"><a href="#0x00-序" class="headerlink" title="0x00 序"></a>0x00 序</h1><p>&nbsp;&nbsp;长久的思考后，这个项目终于又重新开始了。我发现写一个较大的程序的时候，很容易迷失在细节的设计中，我想着前端要用什么，会踩什么坑，后端得怎么设计才安全、才高效。经过在公司这么久的实习，慢慢学会了，从整体去思考，可以先让一个最简单的框架跑起来，或者先完成其中一个独立的部分。对于我们这个项目，我决定先搞定它的核心部分–爬虫。</p>
+<h1 id="0x01-考虑"><a href="#0x01-考虑" class="headerlink" title="0x01 考虑"></a>0x01 考虑</h1><p>学校系统的爬虫，并不像其它博客或者门户网站的爬虫，它没有一个特定的内容组成结构。所以，并没有使用<code>Scrapy</code>这种高级的框架，也没有必要。<br>大致的流程，就是：先找缓存，再找数据库，不完整或者没有，再去爬取，然后存到数据库。<br>结构要尽可能清晰；遵循<code>Do Not Repeat Yourself</code>的设计原则，最大化重用代码；容错性好。</p>
+<h1 id="0x02-细节"><a href="#0x02-细节" class="headerlink" title="0x02 细节"></a>0x02 细节</h1><p>下面就是一个页面一个页面解析了，里面有一些坑，比如：正方有些页面是会检查<code>Referer</code>和<code>Host</code>的，这些都可以用<code>Burp</code>抓包知道。所以我写了个<code>req()</code>函数，来包装<code>requests</code>，尽可能优雅地处理请求错误，也是在实习中学习到的方法。</p>
+<p>logger是使用了Python自带的<code>RotatingHandler</code>来管理压缩日志。</p>
+<p>相对于<code>lxml</code>，我更喜欢<code>BeautifulSoup</code>的API，所以我使用了<code>bs4</code>来解析页面，但是使用了<code>lxml</code>的引擎：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">doc = BeautifulSoup(content, <span class="string">'lxml'</span>)</div></pre></td></tr></table></figure></p>
+<p>这样既保持了解析速度，又保持了开发速度，非常棒的一个库。</p>
+<h1 id="0x03-问题"><a href="#0x03-问题" class="headerlink" title="0x03 问题"></a>0x03 问题</h1><ul>
+<li>爬虫最大的问题就是，如果拿个页面更改，就不能正常使用了。对于个人信息页面的解析，是通过dom元素的id来查找的。</li>
+<li>不同数据应该设置不同的权重，这样即使中间哪个请求无法正常返回，最前端也可以相应地灵活地去展示我们获取到的信息。</li>
+</ul>
+<p>代码已经放在<br><a href="https://github.com/jerrypy/NuptCrawlers" target="_blank" rel="external">Github</a>上了，希望之后有同学可以继续维护改进它。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Python/" rel="tag">#Python</a>
+          
+            <a href="/tags/LifeAnalyzer/" rel="tag">#LifeAnalyzer</a>
+          
+            <a href="/tags/NUPT/" rel="tag">#NUPT</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/12/17/google-fonts-api/" rel="next" title="Google Fonts API使用教程">
+                <i class="fa fa-chevron-left"></i> Google Fonts API使用教程
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/09/16/why-work-hard/" rel="prev" title="为什么要努力？">
+                为什么要努力？ <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -611,6 +446,14 @@
 
 
           
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/01/12/nupt-lifeanalyzer-2/"
+           data-title="NuptLifeAnalyzer札记（2）—— Crawlers" data-url="http://blog.jerrywin.com/2016/01/12/nupt-lifeanalyzer-2/">
+      </div>
+    
+  </div>
+
 
         </div>
         
@@ -630,8 +473,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+      <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="http://static.jerrywin.com/img/blog/avatar.jpg"
@@ -692,6 +544,17 @@
 
       </section>
 
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#0x00-序"><span class="nav-number">1.</span> <span class="nav-text">0x00 序</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#0x01-考虑"><span class="nav-number">2.</span> <span class="nav-text">0x01 考虑</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#0x02-细节"><span class="nav-number">3.</span> <span class="nav-text">0x02 细节</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#0x03-问题"><span class="nav-number">4.</span> <span class="nav-text">0x03 问题</span></a></li></ol></div>
+            
+          </div>
+        </section>
       
 
     </div>
@@ -788,11 +651,9 @@
   
 
   
-  
-    <script type="text/javascript" id="motion.page.archive">
-      $('.archive-year').velocity('transition.slideLeftIn');
-    </script>
-  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
 
 
   
