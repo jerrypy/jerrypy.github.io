@@ -93,22 +93,25 @@
 
 
 <meta name="description" content="本文发表在Freebuf, 版权也属于Freebuf.
+
 0×00 场景SQLMap是检测SQL注入漏洞公认的神器，其本身并不支持作为模块导入使用，但是提供了sqlmapapi.py ,它能够启动一个基于bottle的API服务器，对外提供了丰富的API接口。在我们的一些内部应用中，有用到sqlmapapi来调用sqlmap进行大规模探测。
-我们启用了多个Celery的worker,每个worker">
+我们启用了多个Celery的worker,每个worke">
 <meta property="og:type" content="article">
 <meta property="og:title" content="从SQLMap踩坑到如何优雅地控制子进程">
 <meta property="og:url" content="http://blog.jerrywin.com/2015/11/04/sqlmap-subprocess/index.html">
 <meta property="og:site_name" content="/home/jerry">
 <meta property="og:description" content="本文发表在Freebuf, 版权也属于Freebuf.
+
 0×00 场景SQLMap是检测SQL注入漏洞公认的神器，其本身并不支持作为模块导入使用，但是提供了sqlmapapi.py ,它能够启动一个基于bottle的API服务器，对外提供了丰富的API接口。在我们的一些内部应用中，有用到sqlmapapi来调用sqlmap进行大规模探测。
-我们启用了多个Celery的worker,每个worker">
+我们启用了多个Celery的worker,每个worke">
 <meta property="og:image" content="http://image.3001.net/images/20150817/14398116114331.png!small">
-<meta property="og:updated_time" content="2016-09-20T06:27:51.000Z">
+<meta property="og:updated_time" content="2016-09-20T07:44:30.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="从SQLMap踩坑到如何优雅地控制子进程">
 <meta name="twitter:description" content="本文发表在Freebuf, 版权也属于Freebuf.
+
 0×00 场景SQLMap是检测SQL注入漏洞公认的神器，其本身并不支持作为模块导入使用，但是提供了sqlmapapi.py ,它能够启动一个基于bottle的API服务器，对外提供了丰富的API接口。在我们的一些内部应用中，有用到sqlmapapi来调用sqlmap进行大规模探测。
-我们启用了多个Celery的worker,每个worker">
+我们启用了多个Celery的worker,每个worke">
 <meta name="twitter:image" content="http://image.3001.net/images/20150817/14398116114331.png!small">
 
 
@@ -371,7 +374,8 @@
       
 
       
-        <h6 id="本文发表在Freebuf-版权也属于Freebuf"><a href="#本文发表在Freebuf-版权也属于Freebuf" class="headerlink" title="本文发表在Freebuf, 版权也属于Freebuf."></a>本文发表在<a href="http://www.freebuf.com/tools/75270.html" target="_blank" rel="external">Freebuf</a>, 版权也属于Freebuf.</h6><p><br></p>
+        <p><strong>本文发表在<a href="http://www.freebuf.com/tools/75270.html" target="_blank" rel="external">Freebuf</a>, 版权也属于Freebuf.</strong></p>
+<p><br></p>
 <h2 id="0×00-场景"><a href="#0×00-场景" class="headerlink" title="0×00 场景"></a>0×00 场景</h2><p>SQLMap是检测SQL注入漏洞公认的神器，其本身并不支持作为模块导入使用，但是提供了sqlmapapi.py ,它能够启动一个基于bottle的API服务器，对外提供了丰富的API接口。在我们的一些内部应用中，有用到sqlmapapi来调用sqlmap进行大规模探测。</p>
 <p>我们启用了多个Celery的worker,每个worker中使用gevent协程，向一个sqlmapapi server中下任务，在长时间执行后，在日志中出现大量OSError: Too many open files的报错。解决该问题后，又出现了调用sqlmapapi中的stop函数来关闭超时扫描任务时，任务均变为僵尸进程的问题。</p>
 <p>作为忠实的SQLMap粉丝，我们向官方提交了一些<a href="https://github.com/sqlmapproject/sqlmap/issues/1292" target="_blank" rel="external">issue</a>,但不知何故，在收到官方的一次反馈后就没有后续了。只好自己动手，丰衣足食了。<br><a id="more"></a></p>
@@ -594,7 +598,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-6"><a class="nav-link" href="#本文发表在Freebuf-版权也属于Freebuf"><span class="nav-number">1.</span> <span class="nav-text">本文发表在Freebuf, 版权也属于Freebuf.</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0×00-场景"><span class="nav-number"></span> <span class="nav-text">0×00 场景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0×01-解决-Too-many-open-files"><span class="nav-number"></span> <span class="nav-text">0×01 解决 Too many open files</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0×02-解决僵尸进程"><span class="nav-number"></span> <span class="nav-text">0×02 解决僵尸进程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0×03-如何优雅地处理子进程"><span class="nav-number"></span> <span class="nav-text">0×03 如何优雅地处理子进程</span></a></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0×00-场景"><span class="nav-number">1.</span> <span class="nav-text">0×00 场景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0×01-解决-Too-many-open-files"><span class="nav-number">2.</span> <span class="nav-text">0×01 解决 Too many open files</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0×02-解决僵尸进程"><span class="nav-number">3.</span> <span class="nav-text">0×02 解决僵尸进程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0×03-如何优雅地处理子进程"><span class="nav-number">4.</span> <span class="nav-text">0×03 如何优雅地处理子进程</span></a></li></ol></div>
             
           </div>
         </section>
