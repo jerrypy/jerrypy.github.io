@@ -46,7 +46,7 @@
 <li>爬虫最大的问题就是，如果拿个页面更改，就不能正常使用了。对于个人信息页面的解析，是通过dom元素的id来查找的。</li>
 <li>不同数据应该设置不同的权重，这样即使中间哪个请求无法正常返回，最前端也可以相应地灵活地去展示我们获取到的信息。</li>
 </ul>
-<p>代码已经放在<br><a href="https://github.com/jerrypy/NuptCrawlers" target="_blank" rel="external">Github</a>上了，希望之后有同学可以继续维护改进它。</p>
+<p>代码已经放在<br><a href="https://github.com/jerrypy/NuptLifeAnalyzer" target="_blank" rel="external">Github</a>上了，希望之后有同学可以继续维护改进它。</p>
 ]]></content>
     </entry>
     
