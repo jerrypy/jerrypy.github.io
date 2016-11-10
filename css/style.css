@@ -551,7 +551,6 @@ body {
 }
 #header h1,
 #header .h1 {
-  text-transform: uppercase;
   letter-spacing: 0.01em;
   font-size: 1rem;
   font-style: normal;
@@ -639,7 +638,6 @@ body {
 }
 article header .top-subtitle a {
   font-size: 0.85rem;
-  text-transform: uppercase;
   letter-spacing: 0.01em;
   font-style: normal;
   font-weight: 700;
@@ -674,7 +672,6 @@ article header .meta * {
   font-size: 0.85rem;
 }
 article header .author {
-  text-transform: uppercase;
   letter-spacing: 0.01em;
   font-weight: 700;
 }
