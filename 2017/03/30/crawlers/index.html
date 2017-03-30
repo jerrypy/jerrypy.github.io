@@ -91,13 +91,13 @@
 <h2 id="2-频率"><a href="#2-频率" class="headerlink" title="2 频率"></a>2 频率</h2><p>爬虫通常需要以较快的速度来请求网站，高效率地获取内容。所以我们可以通过IP和Cookie出现的频率来对访问作限制。</p>
 <p>在公共场合，存在许多用户共同使用一个出口IP的情况，比如：机场、酒店、公司、城域网出口等，这个时候如果只针对IP进行频率限制，可能会误杀非常多的正常用户，影响其他用户体验。所以对于公共的IP，每个用户独立的Cookie就可以作为第二层的频率限制指标。</p>
 <p>对于搜索引擎爬虫，我们可以在robots.txt里设置爬虫爬取频率的约定:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">User-Agent: Baiduspier</div><div class="line">Crawl-Delay: 2</div></pre></td></tr></table></figure>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">User-<span class="string">Agent:</span> Baiduspier</div><div class="line">Crawl-<span class="string">Delay:</span> <span class="number">2</span></div></pre></td></tr></table></figure>
 <p>通过加入上面的内容在robots.txt中，百度爬虫最低的爬取间隔就被设为了2秒。robots.txt更详细的语法见：<a href="http://www.robotstxt.org/robotstxt.html" target="_blank" rel="external">http://www.robotstxt.org/robotstxt.html</a></p>
 <p>另外，长时间内，访问频率十分固定的用户可能也是非法爬虫，因为正常人类的浏览有选择偏好，不会所有页面都停留同样的时间。</p>
 <h2 id="3-聚合关联"><a href="#3-聚合关联" class="headerlink" title="3 聚合关联"></a>3 聚合关联</h2><p>为了规避上面的频率的规则，一般爬虫的解决措施都是通过IP代理池、合法User-Agent池、不同账户Cookie池来应对单个维度的频率限制。所以通过聚合关联：一段时间内一个IP对应的User-Agent数和Cookie数（这条规则在IP为公共出口的情况下请勿使用）。</p>
 <h2 id="4-Honeypot-蜜罐"><a href="#4-Honeypot-蜜罐" class="headerlink" title="4 Honeypot 蜜罐"></a>4 Honeypot 蜜罐</h2><p>正规搜索引擎第一次访问一个网站时，会先尝试访问网站的robots.txt和sitemap.xml文件来检查网站是否设置了爬取规定，如果一个带有搜索引擎User-Agent的爬虫没有去访问这两个文件，说明这是一个伪造的爬虫。</p>
 <p>对于全站爬取的爬虫，程序会自动解析页面中所有的链接，然后对这些链接进行访问。我们可以在robots.txt在设置一个禁止爬虫访问的页面：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Disallow: /disallow.html</div></pre></td></tr></table></figure>
+<figure class="highlight avrasm"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="symbol">Disallow:</span> /disallow.html</div></pre></td></tr></table></figure>
 <p>并通过css的<code>display: none</code>属性来对真实用户隐藏，一个真实用户是根本看不到这个链接的，自然也就不可能点击，所以如果有请求来访问这个页面，很有可能这就是一个来自爬虫的请求。</p>
 <p>这样的方法通过前端实现的方法还有很多，比如设置颜色透明或者用其他元素挡住这个链接等等。</p>
 <p>而对于垂直爬虫（只固定爬取某一动态页面的爬虫），比如某页面通过一动态参数来显示不同内容：<code>http://www.target.com?id=1</code>，更改<code>id</code>会显示不同内容。我们可以设置一个“虚假id”，例如：9999。数据库中根本没有这个id为9999的内容，正常用户是不会访问，而通过枚举来发起请求的爬虫，有很大可能会去访问这个id。</p>
