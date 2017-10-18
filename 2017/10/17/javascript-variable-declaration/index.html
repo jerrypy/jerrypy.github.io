@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="Javascript社区为了和其它语言保持统一，使用了let作为新的变量声明关键字。到ECMAScript 2017为止，Javascript中一共有6种声明变量的关键字：var, let, const, function, class, import。本文旨在记录在学习ES6第一部分–变量声明中的一些疑惑。
+变量提升（variable/function hoisting）我们知道var和func">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Javascript变量声明">
+<meta property="og:url" content="http://blog.jerrywin.com/2017/10/17/javascript-variable-declaration/index.html">
+<meta property="og:site_name" content="/home/jerrypy">
+<meta property="og:description" content="Javascript社区为了和其它语言保持统一，使用了let作为新的变量声明关键字。到ECMAScript 2017为止，Javascript中一共有6种声明变量的关键字：var, let, const, function, class, import。本文旨在记录在学习ES6第一部分–变量声明中的一些疑惑。
+变量提升（variable/function hoisting）我们知道var和func">
+<meta property="og:image" content="http://static.jerrywin.com/blog/img/function_scope.png">
+<meta property="og:updated_time" content="2017-10-18T07:27:03.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Javascript变量声明">
+<meta name="twitter:description" content="Javascript社区为了和其它语言保持统一，使用了let作为新的变量声明关键字。到ECMAScript 2017为止，Javascript中一共有6种声明变量的关键字：var, let, const, function, class, import。本文旨在记录在学习ES6第一部分–变量声明中的一些疑惑。
+变量提升（variable/function hoisting）我们知道var和func">
+<meta name="twitter:image" content="http://static.jerrywin.com/blog/img/function_scope.png">
+    
+    
+        <link rel="icon" type="image/png" href="/images/favicon.png" sizes="32x32" />
+    
+    <!-- title -->
+    <title>Javascript变量声明</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/lib/meslo-LG/styles.css">
+    <link rel="stylesheet" href="/lib/justified-gallery/justifiedGallery.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- rss -->
+    
+    
+    <!-- jquery -->
+    <script src="/lib/jquery/jquery.min.js"></script>
+</head>
+
+<body>
+    <div class="content post width mx-auto px2 my4">
+  <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    <header>
+      <span class="top-subtitle">
+          <a href="/archives">Writing</a>
+      </span>
+      
+    <h1 class="posttitle" itemprop="name headline">
+        Javascript变量声明
+    </h1>
+
+
+
+      <div class="meta">
+          <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+              <span itemprop="name">jerrypy</span>
+          </span>
+          
+    <div class="postdate">
+        <time datetime="2017-10-17T10:45:30.000Z" itemprop="datePublished">2017-10-17</time>
+    </div>
+
+
+          
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/es6/">es6</a>, <a class="tag-link" href="/tags/javascript/">javascript</a>
+    </div>
+
+
+      </div>
+    </header>
+    
+
+    <div class="content" itemprop="articleBody">
+      <p>Javascript社区为了和其它语言保持统一，使用了<a href="https://stackoverflow.com/questions/37916940/why-was-the-name-let-chosen-for-block-scoped-variable-declarations-in-javascri" target="_blank" rel="external"><code>let</code></a>作为新的变量声明关键字。到ECMAScript 2017为止，Javascript中一共有6种声明变量的关键字：<code>var</code>, <code>let</code>, <code>const</code>, <code>function</code>, <code>class</code>, <code>import</code>。本文旨在记录在学习ES6第一部分–变量声明中的一些疑惑。</p>
+<h1 id="变量提升（variable-function-hoisting）"><a href="#变量提升（variable-function-hoisting）" class="headerlink" title="变量提升（variable/function hoisting）"></a>变量提升（variable/function hoisting）</h1><p>我们知道<code>var</code>和<code>function</code>都存在变量提升，<code>function</code>不仅仅是声明提升，而是整个函数定义都提升，即你可以在函数声明之前正确调用该函数：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">console</span>.log(x); <span class="comment">// undefined</span></div><div class="line"><span class="keyword">var</span> x = <span class="number">1</span>;</div><div class="line"></div><div class="line">f(<span class="number">1</span>); <span class="comment">// f不是undefined，这里可以正确调用，输出1</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params">a</span>) </span>&#123;<span class="built_in">console</span>.log(a)&#125;;</div></pre></td></tr></table></figure>
+<p>而<code>let</code>, <code>const</code>却不会出现类似的情况：</p>
+<figure class="highlight gauss"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">console.<span class="built_in">log</span>(x); <span class="comment">// ReferenceError</span></div><div class="line"><span class="keyword">let</span> x = <span class="number">1</span>;</div><div class="line"><span class="comment">// const x = 1;</span></div></pre></td></tr></table></figure>
+<p>那么这样声明的变量<a href="https://stackoverflow.com/questions/31219420/are-variables-declared-with-let-or-const-not-hoisted-in-es6" target="_blank" rel="external">到底提升没有</a>？</p>
+<h2 id="let-const变量“提升”"><a href="#let-const变量“提升”" class="headerlink" title="let const变量“提升”"></a><code>let</code> <code>const</code>变量“提升”</h2><blockquote>
+<p><a href="http://ecma-international.org/ecma-262/6.0/index.html#sec-let-and-const-declarations" target="_blank" rel="external">let and const declarations define variables that are scoped to the running execution context’s LexicalEnvironment. The variables are <strong>created</strong> when their containing Lexical Environment is instantiated but may not be accessed in any way until the variable’s LexicalBinding is evaluated.</a><br>这些变量在其所在的词法环境初始化的时候就<strong>被创建</strong>，但是需要等到执行完变量绑定后才能被访问。</p>
+</blockquote>
+<p>可以看到，规格并没有直接使用”hoist”这个词，但是这些变量同样也是在块级作用域开始初始化的时候就被创建了（存在在TDZ中）。这种行为也可以说是“提升”，但是是字面意义上的提升（literally），而不是我们约定的“变量提升”。</p>
+<h1 id="Temporary-Dead-Zone（临时死区）"><a href="#Temporary-Dead-Zone（临时死区）" class="headerlink" title="Temporary Dead Zone（临时死区）"></a>Temporary Dead Zone（临时死区）</h1><p>如上面引用里提到的，这些变量虽然被创建了，但是状态是为初始化且不可访问，直到这个变量的绑定完成为止。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">func</span>(<span class="params"></span>) </span>&#123; <span class="comment">// ------ 从这里开始</span></div><div class="line">    <span class="keyword">var</span> x = <span class="number">1</span>;</div><div class="line">    <span class="keyword">let</span> x = <span class="number">2</span>; <span class="comment">// ------ 到这一行为止为TDZ</span></div><div class="line">&#125;</div><div class="line"></div><div class="line">func(); <span class="comment">// SyntaxError: Identifier 'x' has already been declared</span></div></pre></td></tr></table></figure>
+<p>我们再来明确一下TDZ结束的时间点：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> x = x; <span class="comment">// SyntaxError: Identifier 'x' has already been declared</span></div></pre></td></tr></table></figure>
+<p>这条语句同样会报错，因为右边<code>x</code>的访问发生在绑定的同时，而没有等到绑定完全结束，所以TDZ还没有结束。</p>
+<h2 id="函数默认参数中的”TDZ”"><a href="#函数默认参数中的”TDZ”" class="headerlink" title="函数默认参数中的”TDZ”"></a>函数默认参数中的”TDZ”</h2><p>很容文章和<a href="https://leanpub.com/understandinges6/read#leanpub-auto-default-parameter-value-temporal-dead-zone" target="_blank" rel="external">书</a>中都提到函数默认参数中也有“TDZ”，这里对于初学ES6（我），一提到TDZ就联想到<code>let</code>和<code>const</code>，所以会让人<a href="https://stackoverflow.com/questions/46691231/how-does-javascript-declare-function-parameters" target="_blank" rel="external">误解</a>，以为参数也是通过<code>let</code>方式来声明的，这样下面的代码就变得不可理解：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">func</span>(<span class="params">arg = 2</span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> arg = <span class="number">1</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>如果参数真的是用<code>let</code>声明的话，其等同于：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> arg = <span class="number">2</span>;</div><div class="line"><span class="keyword">var</span> arg = <span class="number">1</span>;</div></pre></td></tr></table></figure>
+<p>应该会报重声明的错才对。要解释这个问题，我们需要深入规格，来探究JS在初始化函数对象的时候到底做了什么。</p>
+<p>如上面这段代码，当调用<code>func()</code>语句时，引擎进入函数调用流程（详见<a href="http://www.ecma-international.org/ecma-262/7.0/#sec-ecmascript-function-objects-call-thisargument-argumentslist" target="_blank" rel="external">规格9.2.1 [[Call]] ( thisArgument, argumentsList)</a>），即调用函数对象内部的<code>[[Call]]</code>方法。然后在第7步，调用<a href="http://www.ecma-international.org/ecma-262/7.0/#sec-ordinarycallevaluatebody" target="_blank" rel="external">OrdinaryCallEvaluateBody</a>时，进入函数声明实例化过程（<a href="http://www.ecma-international.org/ecma-262/7.0/#sec-functiondeclarationinstantiation" target="_blank" rel="external">FunctionDeclarationInstantiation</a>）。</p>
+<p>(详细的算法步骤可以看<a href="https://segmentfault.com/a/1190000007537913" target="_blank" rel="external">这篇文章</a>里的中文翻译)</p>
+<p>我们以下面这段代码为例，来讲解具体步骤：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">func</span>(<span class="params">x = y, y = 1</span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> ;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<p><strong>9.2.12 FunctionDeclarationInstantiation (func, argumentsList)</strong><br>When an execution context is established for evaluating an ECMAScript function a new function Environment Record is created and bindings for each formal parameter are instantiated in that Environment Record. Each declaration in the function body is also instantiated. If the function’s formal parameters do not include any default value initializers then the body declarations are instantiated in the same Environment Record as the parameters. <strong>If default value parameter initializers exist, a second Environment Record is created for the body declarations.</strong> Formal parameters and functions are initialized as part of FunctionDeclarationInstantiation. All other bindings are initialized during evaluation of the function body.</p>
+</blockquote>
+<p>当参数存在默认值得时候，在这个函数的执行上下文里，会创建两个环境记录（一个是参数体的–envRecParam，一个是函数体的envRecBody）。</p>
+<p>在原算法第21步，开始函数参数的绑定：</p>
+<ul>
+<li>for each paramName in parameterNames:<ul>
+<li>Perform envRecParam.<a href="http://es-discourse.com/t/why-function-call-might-not-always-mean-function-call/38/2" target="_blank" rel="external">CreateMutableBinding</a>(paramName, false);</li>
+</ul>
+</li>
+</ul>
+<p>那么现在envRecParam存在了两个变量(x, y)，但并没有初始化(created but uninitialized)。然后在第23和25步，处理argumentsList并开始<a href="https://www.ecma-international.org/ecma-262/7.0/#sec-destructuring-binding-patterns-runtime-semantics-iteratorbindinginitialization" target="_blank" rel="external">IteratorBindingInitialization</a><a href="http://es-discourse.com/t/why-function-call-might-not-always-mean-function-call/38/2" target="_blank" rel="external">遍历绑定</a>。</p>
+<p>这里的BindingItem是一个SingleNameBinding，可以看到在IteratorBindingInitialization算法的第5步里，对右值（这里是y）进行求值，而y还处在未初始化状态，则报出ReferenceError.</p>
+<p>（规格中有很多个IteratorBindingInitialization，第一次我看的是Function Definitions里的定义，完全一头雾水。但其实规格把函数的参数都当做数组结构模板来解析，可以看到<a href="http://es-discourse.com/t/why-function-call-might-not-always-mean-function-call/38/2" target="_blank" rel="external">kangax大神</a>当初也是和我一样摸不着头脑啊~）</p>
+<p>其实原理是和<code>let</code>是一致的，但不能简单地理解参数就是用<code>let</code>来声明的，比如重复的参数名在非strict模式下是被允许的。</p>
+<h1 id="再探function参数"><a href="#再探function参数" class="headerlink" title="再探function参数"></a>再探function参数</h1><h2 id="function中参数的作用域"><a href="#function中参数的作用域" class="headerlink" title="function中参数的作用域"></a>function中参数的作用域</h2><p>在函数默认参数的”TDZ”一节，提到了当函数初始化的时候会为函数创建一个子作用域用于绑定参数，如果函数参数带有默认值，则会再创建一个环境记录用于绑定函数体内的参数。我们还是通过几个例子来测试一下，这两个作用域（环境记录）之间的关系。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> a = <span class="number">1</span>;</div><div class="line"><span class="keyword">let</span> b = <span class="number">2</span>;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">func</span>(<span class="params">x = a</span>) </span>&#123;</div><div class="line">    <span class="keyword">let</span> b = <span class="number">3</span>;</div><div class="line">    <span class="built_in">console</span>.log(x);</div><div class="line">    <span class="built_in">console</span>.log(b);</div><div class="line">&#125;</div><div class="line"></div><div class="line">func(); <span class="comment">//1 3</span></div></pre></td></tr></table></figure>
+<p>通过上面这个例子，可以得出参数作用域和函数体作用域都是外层作用域的子作用域，在两个作用域内都可以访问到外层变量，而且可以使用<code>let</code>来覆盖外层变量。</p>
+<p>函数体内显然是可以访问到参数变量的，但是并不可以使用<code>let</code>去定义一个重名变量，所以函数体作用域并不是参数作用域的子作用域，那么这两个作用域之间到底是什么关系呢？</p>
+<p><img src="http://static.jerrywin.com/blog/img/function_scope.png" alt="funtion_scope"></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> y =<span class="number">1</span>;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params">x = function(</span>)</span>&#123;<span class="built_in">console</span>.log(y)&#125;,y=<span class="number">2</span>) &#123;</div><div class="line">  x(); <span class="comment">// 2</span></div><div class="line">  <span class="keyword">var</span> y = <span class="number">3</span>; <span class="comment">// if use let, then throw error</span></div><div class="line">  <span class="built_in">console</span>.log(y); <span class="comment">// 3</span></div><div class="line">  x(); <span class="comment">// 2</span></div><div class="line">&#125;</div><div class="line">foo();</div><div class="line"><span class="built_in">console</span>.log(y); <span class="comment">// 1</span></div></pre></td></tr></table></figure>
+<p>参数作用域在这里被称作是一个<a href="http://dmitrysoshnikov.com/ecmascript/es6-notes-default-values-of-parameters/#conditional-intermediate-scope-for-parameters" target="_blank" rel="external">中间作用域</a>，在函数体作用域中可以访问和修改参数作用域中的变量，但是不可以重声明（除了var），而这么做的原因，规格里也说明了：</p>
+<blockquote>
+<p>NOTE: A separate Environment Record is needed to ensure that closures created by expressions in the formal parameter list do not have visibility of declarations in the function body.</p>
+</blockquote>
+<p>因为ES6中，参数默认值可以是一个函数，所以需要把参数限定在一个作用域中来保证参数内闭包对函数体内变量无访问权限。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> x = <span class="number">1</span>;</div><div class="line"> </div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params">y = function(</span>) </span>&#123; <span class="keyword">return</span> x; &#125;) &#123; <span class="comment">// capture `x`</span></div><div class="line">  <span class="keyword">var</span> x = <span class="number">2</span>;</div><div class="line">  <span class="keyword">return</span> y();</div><div class="line">&#125;</div><div class="line"> </div><div class="line">foo(); <span class="comment">// correctly 1, not 2</span></div></pre></td></tr></table></figure>
+<h2 id="function中变量提升吗？"><a href="#function中变量提升吗？" class="headerlink" title="function中变量提升吗？"></a>function中变量提升吗？</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">func</span>(<span class="params">x = 1</span>) </span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(x);</div><div class="line">    <span class="keyword">var</span> x = <span class="number">2</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 变量提升的话：</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">func</span>(<span class="params">x = 1</span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> x;</div><div class="line">    <span class="built_in">console</span>.log(x);</div><div class="line">    x = <span class="number">2</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line">func(); <span class="comment">// 这里输出的是1 为什么不是undefined呢？</span></div></pre></td></tr></table></figure>
+<p><a href="http://www.ecma-international.org/ecma-262/7.0/#sec-functiondeclarationinstantiation" target="_blank" rel="external">FunctionDeclarationInstantiation</a>里27.f.i.5 ~ 27.f.i.6阐述了原因：设置函数体内和参数重名的var变量的初始值为该参数的默认值，即上面的函数实际上应该解释为：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">func</span>(<span class="params">x = 1</span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> x = <span class="number">1</span>; <span class="comment">// 同名变量， 初始化为参数默认值</span></div><div class="line">    <span class="built_in">console</span>.log(x);</div><div class="line">    x = <span class="number">2</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="for中的蹊跷"><a href="#for中的蹊跷" class="headerlink" title="for中的蹊跷"></a>for中的蹊跷</h1><h2 id="for循环的作用域"><a href="#for循环的作用域" class="headerlink" title="for循环的作用域"></a>for循环的作用域</h2><p>直接上代码：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> i = <span class="number">1</span>;</div><div class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">2</span>; i &lt; <span class="number">5</span>; i++)&#123; <span class="comment">// SyntaxError: Identifier 'i' has already been declared</span></div><div class="line">    <span class="built_in">console</span>.log(i);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">for</span>(<span class="keyword">let</span> j = <span class="number">0</span>; j &lt; <span class="number">3</span>; j++) &#123;</div><div class="line">    <span class="keyword">let</span> j = <span class="string">'abc'</span>;</div><div class="line">    <span class="built_in">console</span>.log(j);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 输出3个abc</span></div></pre></td></tr></table></figure>
+<p>可以看到for中的第一个表达式是在外层作用域中，而循环体是在一个子作用域中。</p>
+<h2 id="for循环中的let"><a href="#for循环中的let" class="headerlink" title="for循环中的let"></a>for循环中的let</h2><p>每当一本JS书籍要讲解闭包时，总会出现下面的例子：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> arr = [];</div><div class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">3</span>; i++) &#123;</div><div class="line">    arr[i] = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="built_in">console</span>.log(i);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">arr[<span class="number">0</span>](); <span class="comment">// 2</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">var</span> arr = [];</div><div class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">3</span>; i++) &#123;</div><div class="line">    arr[i] = <span class="function"><span class="keyword">function</span> (<span class="params">num</span>) </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">            <span class="built_in">console</span>.log(num);</div><div class="line">        &#125;</div><div class="line">    &#125;(i);</div><div class="line">&#125;</div><div class="line"></div><div class="line">arr[<span class="number">0</span>](); <span class="comment">// 0</span></div></pre></td></tr></table></figure>
+<p>上面的代码显然没有达到我们的意图，而利用闭包则可以正确的完成这个逻辑。但是在<code>let</code>出现后，我们不需要闭包同样能完成相同的工作：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> arr = [];</div><div class="line"><span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="number">3</span>; i++) &#123;</div><div class="line">    arr[i] = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="built_in">console</span>.log(i);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">arr[<span class="number">0</span>](); <span class="comment">// 0</span></div><div class="line">arr[<span class="number">2</span>](); <span class="comment">// 2</span></div></pre></td></tr></table></figure>
+<p>那么这里用<code>var</code>和<code>let</code>的区别在哪里呢？</p>
+<p>（详细的规格算法在<a href="http://www.ecma-international.org/ecma-262/7.0/#sec-createperiterationenvironment" target="_blank" rel="external">CreatePerIterationEnvironment</a>描述）</p>
+<p>原因是，当你在for循环语句使用<code>let</code>或<code>const</code>，引擎会为每一次循环创建一个新的词法环境。在这个环境里，会<strong>重新建立</strong>一个绑定，然后用上一个环境的值来作为初始化值，见：<a href="https://stackoverflow.com/questions/30899612/explanation-of-let-and-block-scoping-with-for-loops" target="_blank" rel="external">Explanation of <code>let</code> and block scoping with for loops</a>。所以即使你使用的是<code>const</code>，它做的并不是简单的赋值（给已存在的绑定赋值）所以不会报错。</p>
+
+    </div>
+  </article>
+  
+    <div class="blog-post-comments">
+        
+                <section id="comments">
+        <div id="disqus_thread">
+         </div>
+                </section>
+        
+    </div>
+
+
+</div>
+
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2017 /home/jerrypy
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/archives">Writing</a></li>
+        <li><a href="/about">About</a></li>
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    <script src="/lib/justified-gallery/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- Google Analytics -->
+
+<!-- Disqus Comments -->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'home-jerrypy';
+
+        (function(){
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        }());
+    </script>
+
+
+<!-- 百度统计代码 -->
+<script>
+var _hmt = _hmt || [];
+(function() {
+   var hm = document.createElement("script");
+     hm.src = "https://hm.baidu.com/hm.js?ec6f803d26e3885c9a8eb87ca36f0560";
+       var s = document.getElementsByTagName("script")[0]; 
+         s.parentNode.insertBefore(hm, s);
+         })();
+</script>
+
+
+</body>
+</html>
