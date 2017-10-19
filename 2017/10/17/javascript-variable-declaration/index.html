@@ -15,7 +15,7 @@
 <meta property="og:description" content="Javascript社区为了和其它语言保持统一，使用了let作为新的变量声明关键字。到ECMAScript 2017为止，Javascript中一共有6种声明变量的关键字：var, let, const, function, class, import。本文旨在记录在学习ES6第一部分–变量声明中的一些疑惑。
 变量提升（variable/function hoisting）我们知道var和func">
 <meta property="og:image" content="http://static.jerrywin.com/blog/img/function_scope.png">
-<meta property="og:updated_time" content="2017-10-18T07:27:03.000Z">
+<meta property="og:updated_time" content="2017-10-19T02:51:06.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Javascript变量声明">
 <meta name="twitter:description" content="Javascript社区为了和其它语言保持统一，使用了let作为新的变量声明关键字。到ECMAScript 2017为止，Javascript中一共有6种声明变量的关键字：var, let, const, function, class, import。本文旨在记录在学习ES6第一部分–变量声明中的一些疑惑。
@@ -90,7 +90,7 @@
 <p>我们再来明确一下TDZ结束的时间点：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> x = x; <span class="comment">// SyntaxError: Identifier 'x' has already been declared</span></div></pre></td></tr></table></figure>
 <p>这条语句同样会报错，因为右边<code>x</code>的访问发生在绑定的同时，而没有等到绑定完全结束，所以TDZ还没有结束。</p>
-<h2 id="函数默认参数中的”TDZ”"><a href="#函数默认参数中的”TDZ”" class="headerlink" title="函数默认参数中的”TDZ”"></a>函数默认参数中的”TDZ”</h2><p>很容文章和<a href="https://leanpub.com/understandinges6/read#leanpub-auto-default-parameter-value-temporal-dead-zone" target="_blank" rel="external">书</a>中都提到函数默认参数中也有“TDZ”，这里对于初学ES6（我），一提到TDZ就联想到<code>let</code>和<code>const</code>，所以会让人<a href="https://stackoverflow.com/questions/46691231/how-does-javascript-declare-function-parameters" target="_blank" rel="external">误解</a>，以为参数也是通过<code>let</code>方式来声明的，这样下面的代码就变得不可理解：</p>
+<h2 id="函数默认参数中的”TDZ”"><a href="#函数默认参数中的”TDZ”" class="headerlink" title="函数默认参数中的”TDZ”"></a>函数默认参数中的”TDZ”</h2><p>很容文章和<a href="https://leanpub.com/understandinges6/read#leanpub-auto-default-parameter-value-temporal-dead-zone" target="_blank" rel="external">书</a>中都提到函数默认参数中也有“TDZ”，这里对于初学ES6的人（我），一提到TDZ就联想到<code>let</code>和<code>const</code>，所以会让人<a href="https://stackoverflow.com/questions/46691231/how-does-javascript-declare-function-parameters" target="_blank" rel="external">误解</a>，以为参数也是通过<code>let</code>方式来声明的，这样下面的代码就变得不可理解：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">func</span>(<span class="params">arg = 2</span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> arg = <span class="number">1</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>如果参数真的是用<code>let</code>声明的话，其等同于：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> arg = <span class="number">2</span>;</div><div class="line"><span class="keyword">var</span> arg = <span class="number">1</span>;</div></pre></td></tr></table></figure>

@@ -21,7 +21,7 @@
 <p>我们再来明确一下TDZ结束的时间点：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> x = x; <span class="comment">// SyntaxError: Identifier 'x' has already been declared</span></div></pre></td></tr></table></figure>
 <p>这条语句同样会报错，因为右边<code>x</code>的访问发生在绑定的同时，而没有等到绑定完全结束，所以TDZ还没有结束。</p>
-<h2 id="函数默认参数中的”TDZ”"><a href="#函数默认参数中的”TDZ”" class="headerlink" title="函数默认参数中的”TDZ”"></a>函数默认参数中的”TDZ”</h2><p>很容文章和<a href="https://leanpub.com/understandinges6/read#leanpub-auto-default-parameter-value-temporal-dead-zone" target="_blank" rel="external">书</a>中都提到函数默认参数中也有“TDZ”，这里对于初学ES6（我），一提到TDZ就联想到<code>let</code>和<code>const</code>，所以会让人<a href="https://stackoverflow.com/questions/46691231/how-does-javascript-declare-function-parameters" target="_blank" rel="external">误解</a>，以为参数也是通过<code>let</code>方式来声明的，这样下面的代码就变得不可理解：</p>
+<h2 id="函数默认参数中的”TDZ”"><a href="#函数默认参数中的”TDZ”" class="headerlink" title="函数默认参数中的”TDZ”"></a>函数默认参数中的”TDZ”</h2><p>很容文章和<a href="https://leanpub.com/understandinges6/read#leanpub-auto-default-parameter-value-temporal-dead-zone" target="_blank" rel="external">书</a>中都提到函数默认参数中也有“TDZ”，这里对于初学ES6的人（我），一提到TDZ就联想到<code>let</code>和<code>const</code>，所以会让人<a href="https://stackoverflow.com/questions/46691231/how-does-javascript-declare-function-parameters" target="_blank" rel="external">误解</a>，以为参数也是通过<code>let</code>方式来声明的，这样下面的代码就变得不可理解：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">func</span>(<span class="params">arg = 2</span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> arg = <span class="number">1</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>如果参数真的是用<code>let</code>声明的话，其等同于：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> arg = <span class="number">2</span>;</div><div class="line"><span class="keyword">var</span> arg = <span class="number">1</span>;</div></pre></td></tr></table></figure>
@@ -142,6 +142,56 @@
     </entry>
     
     <entry>
+      <title><![CDATA[S.H.A.R.E]]></title>
+      <url>http://blog.jerrywin.com/2017/03/24/share/</url>
+      <content type="html"><![CDATA[<p><img src="http://static.jerrywin.com/blog/img/aaron_swartz.jpeg" alt="aaron_swartz"></p>
+<p>开源是历史的必然。</p>
+<p>每到招新季，我们协会的帐篷都会吸引不少人驻足。倒不是因为对技术感兴趣的这么多，而是看了我们协会的名字–开源协会，都不知道是干什么的。“你们是搞环保的吗？”，是学弟学妹们问的最多的问题。</p>
+<p>从上世纪80年代，Richard Stallman发起GNU（读作革奴）计划开始，自由软件在全世界技术圈燃起了一场燎原之火。老牌黑客们把传统软件和开源软件比作大教堂和集市，之前集中式、封闭式的开发已经不适用于互联网时代，而点对点、动态的多人协同的开发方式已经诞生了无数像Linux这种史诗级别的杰作。当知道GNU这个缩写的全称–GNU is Not Unix，G就是代表GNU这种递归定义时，我就觉得“真他么酷”。</p>
+<p>Free and Share不仅仅是自由软件的主旨，同时也是互联网的精髓。可能由于是最后一批独生子女的缘故，中国九零一代年轻人对互联网的接收能力，甚至超过了互联网的发展速度。当湾湾们还在抢购“大陆没有的”全球第一大零售品牌H&amp;M的时候，大陆的年轻人们已经习惯了出门滴滴，移动支付的互联网+生活。在日韩留学的同学们，回国都怕被嫌老土，社交网络的覆盖速度远高于病毒的传播。</p>
+<p>如今的商业模式也从卖实物变成了卖服务，大公司们争相开放自己核心框架的源代码，为了提高自己在开源社区的知名度。共享，这一理念，在共享单车推出后达到高潮。漂流图书馆、分时租赁，互联网让人与人之间的新玩法层出不穷。我们被链接在这么一张巨大的网里，“如果在搜索引擎中搜不到你，其实你就并不存在”。</p>
+<p>年轻人们对从属的概念越来越弱。物质方面，我们可以共享房子、车子，精神方面，人们愿意分享知识、想法、歌单。同时，对差异的接受程度，不同的生活方式、不同的文化语言、不同的认知，也越来越高，互联网让中国的年轻人们变得更加优秀。</p>
+<p>《奇葩大会》请来了李开复，作了一个简短的关于人工智能的演讲。一辆车90%多的时间是停着的观点，让大家重新开始从自身需要的角度思考，是否可以打破一个家庭要有车有房这种传统观念。无人车进入大家的生活会比你想的要快的多，关于国人素质太低，共享经济无法推行的言论，也自然会被历史湮灭。</p>
+<p>机器和人的距离越来越近，物竞天择，一部分人无疑会成为科技发展的牺牲品。机器永远不能代替的是人类复杂细腻的感情，学会接受差异、理解不同，才能在互联网时代更好地生存。世界正在变得包容和共享，而你还不肯给室友抄作业。</p>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[《Sense 8》]]></title>
+      <url>http://blog.jerrywin.com/2017/02/17/sense_8md/</url>
+      <content type="html"><![CDATA[<p><img src="http://static.jerrywin.com/blog/img/sense_8.jpeg" alt="sense_8"></p>
+<blockquote>
+<p>谁的父亲死了<br>请你告诉我如何悲伤<br>谁的爱人走了<br>请你告诉我如何遗忘<br>不管你拥有什么<br>我们生来就是孤独</p>
+</blockquote>
+<h2 id="一"><a href="#一" class="headerlink" title="一"></a>一</h2><p><span style="color: rgb(160, 160, 160); box-sizing: border-box;"> “I was just…</span><br><span style="color: rgb(160, 160, 160); box-sizing: border-box;">Thinking about you.”</span></p>
+<p>大学有一段时间，我以为自己快死了，每天都很害怕。我想到了史铁生，《我与地坛》里的他闻名于坚强和疾病。我买了一本他妻子陈希米写的《让死活下去》来读，希望找点慰藉。和预料中的相反，书中大部分情绪都是消极的；是一个寡妇的嘶吼、抱怨，是杂乱的。偶尔看到几句鸡汤，也不能让我对这本书产生更多的好感。幸好翻到了一则书评：“……她痛心疾首地说，你糊里糊涂地听”。我才意识到，“感同身受”这种感受是根本不存在的，语言或文字，都注定被误解。人与人之间能做到的极致，就只有陪伴。所以，我们生来孤独。</p>
+<p>但在《Sense 8》里，打破了这个极限。8个人都有相同的唯一超能力，就是“感同身受”。如果如上面所说，他们能做到这一点，是否就再也不会孤独？第四集，当所有人同时哼起《What’s Up》，明明是默契的同步，你却能真真切切地感到每一个人此刻又是多么得孤独，两个对立面在穿插、交融，加上剧情的设定：这个能力没有办法控制，它自然会来，无法利用，无法改变，我们终将孤独。</p>
+<h2 id="二"><a href="#二" class="headerlink" title="二"></a>二</h2><p><span style="color: rgb(160, 160, 160); box-sizing: border-box;">“Face your demons with us.”</span></p>
+<p>主角们对自由的追求和偏执，让我羡慕。</p>
+<p>他们面对着这个社会最严重的问题，没有让这个社会的悲哀，变成自己的悲哀。Sun从来没有臣服于亚洲传统父亲重男轻女的观念，她做的一切，只是为了兑现对母亲的承诺；在混乱贫困、疾病泛滥的非洲，Capheus没有选择金钱和权力，坚定不移地听着妈妈的话；面对酗酒、家暴的父亲，Wolfgang选择了杀掉自己血缘上的至亲；高层阶级对家族名誉的病态维护，第三世界对LGBT的抵制和侮辱；毒品、同妻、性……Wachowsksi姐妹恨不得把这整个世界的压抑一股脑扔在观众面前，他们希望颠覆你既有的世界观，重新思考之前的一切，是不是真的就是其他人说那样。</p>
+<p>直面这个世界所有的黑暗。这是我们的slogan，这部剧的导演给了最好的诠释，给你一个看透这个世界的机会，你又敢面对吗？</p>
+<h2 id="三"><a href="#三" class="headerlink" title="三"></a>三</h2><p><span style="color: rgb(160, 160, 160); box-sizing: border-box;">“By choice.”</span></p>
+<p>在Felix的病床前，Kala感受到Wolfgang那种失去亲人般的痛苦，她问Wolfgang：“你和他就像亲兄弟一样吧？”，Wolfgang说，他们之间的关系是一种比血缘更加紧密的联系–选择。</p>
+<p>整部剧，好像是一次三观的洗礼，在这句台词后达到了高潮。多少人被困在血缘的桎梏中，无法脱身。血缘，只是一个随机的，你无法去否认的关系。而在我们成长，能够独立思考之后，通过自由意志的选择，难道不比这种随机性更加强大？</p>
+<p>我选择你成为我的妻子，我选择你做我一辈子的兄弟。</p>
+<p>不受任何束缚，这是自由最真正的含义。</p>
+<h2 id="四"><a href="#四" class="headerlink" title="四"></a>四</h2><p><span style="color: rgb(160, 160, 160); box-sizing: border-box;">“What is Human – 生而为人”</span></p>
+<p>第十集最后十分钟，我是跪着看完的。 我不曾记得在哪部影视剧里有过一个场景，能让我离开椅子，无法安坐，双手按着脑袋，仿佛要爆裂，还“哭的像个两百斤的孩子”。</p>
+<p>权利的游戏里，“For the watch”，Snow被一刀一刀捅死；汉尼拔里，各种奇异的腐烂死尸；荒野猎人里，小李子躲进马肚子里取暖；都只让我邹邹眉头，我以为我已经强大到不害怕看任何剧情。</p>
+<p>可当我看着，从宫缩阵痛开始，到开三指、开五指，婴儿挣扎着，冲破产道，汲取第一口空气……那一瞬，我放佛感受到，母亲体温渐渐冰冷，最后一次微弱的呼吸，最后一滴眼泪……在生与死面前，作为人类的我们，从来都没有任何抵抗力。</p>
+<h2 id="五"><a href="#五" class="headerlink" title="五"></a>五</h2><p><span style="color: rgb(160, 160, 160); box-sizing: border-box;">“For me, it is like 1985.”</span></p>
+<p>Riley自嘲着回答父亲的夸奖，“DJ不过就是让一群喝醉的人high起来，借着音乐约个炮而已”。父亲说：“贝多芬在他那个年代的作用，也一样”。</p>
+<p>看到父亲和朋友们在演出前抽大麻，让自己更兴奋，Riley开玩笑说：“现在是1985年吗，还在抽大麻？”</p>
+<p>“对我们来说，永远都是1985……”</p>
+<p>圣诞特辑里，Lito从来没有想到妈妈原来早就知道自己是个Gay，她不在乎邻里亲戚们的嘲讽，“Come here, my baby penguin”，Lito双手放在身后，极力地抑制着自己的激动……</p>
+<p>可能我们永远无法做到感同身受，但是我们可以做到设身处地，包容和理解、博爱。</p>
+<h2 id="六"><a href="#六" class="headerlink" title="六"></a>六</h2><p><span style="color: rgb(160, 160, 160); box-sizing: border-box;">“The End”</span></p>
+<p>我很自豪，有一颗大心脏，能适应剧里面的“重口味”，愿意接受，所有不一样的生活和选择，还有想法。</p>
+<p>当我们不得不从从剧情中抽离，要真正独自去面对这个孤岛世界，“最终，衡量我们的，是内心的勇气”。</p>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[HTTPS代理蜜罐]]></title>
       <url>http://blog.jerrywin.com/2017/02/15/https-proxy-honeypot/</url>
       <content type="html"><![CDATA[<h2 id="0x00-背景"><a href="#0x00-背景" class="headerlink" title="0x00 背景"></a>0x00 背景</h2><p>情报系统中，代理蜜罐是非常重要的一环。通过这个蜜罐，我们可以收集到诸如撞库、扫号甚至0day等实时的攻击信息。</p>
@@ -168,6 +218,28 @@
 <li><a href="https://imququ.com/post/web-proxy.html" target="_blank" rel="external">https://imququ.com/post/web-proxy.html</a></li>
 <li>《HTTP权威指南》</li>
 </ul>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[有关酒的抓马]]></title>
+      <url>http://blog.jerrywin.com/2017/01/14/alcohol-drama/</url>
+      <content type="html"><![CDATA[<h2 id="一"><a href="#一" class="headerlink" title="一"></a>一</h2><p>第一天进公司，看wiki。翻到有个人叫李克勤，还有个人叫张紫仪，我以为这公司还得取花名，都准备好叫陈冠希了，然后老大给我介绍了真人。</p>
+<p>那天第一次去克勤组的局，边看他调酒，边听他讲每次必讲的故事。他也就比我早来几个月，所以每次组局，也都有新来的，得问一些新来的都会问的问题。</p>
+<p>克勤在南航读的大学，大四毕业季找工作的时候，同我一样视大学课程如粪土的他，半个offer也没拿到。那天晚上，他浑浑噩噩地来到了学校里的酒吧，让老板介绍了一杯能助眠的酒，再醒来就是第二天了。后来他知道，那晚的酒，叫Tomorrow.</p>
+<p>接下来发生的事呢，就顺理成章了，反正也找不到工作，就当上了酒吧学徒。在酒吧里能看到的种种，也都看了一遍；能约的炮，就差那么一点点就约到。最后成功肄业。</p>
+<p>对于每次只点套餐的我，当然不会放过这么好的机会 😊， 每一种我都要了一杯。从大份的长岛冰茶，到费时费力调的B52, 每一杯都有独特的气味，每一个名字，克勤都说了来历。酒，总是容易产生有趣的故事。每个时代，都不缺好酒者；每个Bar，都需要个会讲故事的Bartender。</p>
+<p>那晚，我倒在了最后一杯“水母”上。是我的最后一杯，也是那次局的最后一杯，我坚持到了最后，这波不亏。其实在倒数第二杯带着川贝香的（忘了名字）开始，我胃里已经翻腾到不行，那让我联想起以前常喝的川贝枇杷膏，I feel so sick. 可温暖的百利甜散开在浸了蓝橙的伏特加里，我昏沉的脑袋变得轻盈，像是要慢慢浮出水面。坐在克勤骑的电动后面，他说的一字一句都很模糊，但借着水母的余烬和冰冷的空气，那些话却是那晚我唯一能够清楚记得的。</p>
+<h2 id="二"><a href="#二" class="headerlink" title="二"></a>二</h2><p>克勤说他有“人群恐惧症”。团建的时候，他还带着电脑，没有Wifi，就跑一些离线的数据分析。从进门开始，我就能感受到他的不安，尽管他已经极力地在避免发生一些尴尬，怕人在看他、怕人问问题、怕人好奇。</p>
+<p>说实话，这是我第一次这么仔细地观察一个“担忧”的人的神态和行为。因为以前，我只顾着自己“担忧”去了。在我还没来得及应对自己的措手不及时，我发现了克勤，好像在照镜子，看着另一个自己手忙脚乱地掩饰。突然觉得很有趣，你自以为完美地掩盖了尴尬，没想到一举一动别人都看在眼里。不知道以前是不是也有个，在我慌张的时候，默默看着我的人。</p>
+<p>但是在自我介绍环节，我和他，同样“恐惧”的两个人的表现却孑然不同。准备好的词，我大概忘了一半，实在想不起来自己要说什么，也就悻悻然地下来了。而克勤呢，从拿到麦克风开始，从调侃同事到吹嘘自己，衔接地那么老练。如果没有看到他其他时候的样子，我会觉得他跟我说自己有“人群恐惧症”肯定是在嘲讽。</p>
+<p>在工作上，和销售或者客户交流的时候，你看到的只是一个久经沙场的调酒师，一个轻车熟路的老司机。</p>
+<p>用他的话说：“没办法”。</p>
+<p>在生活中，每次都会去主动买单的人，我只见过两个，想睡觉的睡和李克勤。虽然你知道，那种饭后不会把他那份主动打给你的人很少。但总还有，不是吗？他们让我知道，你能用信任，换回的不只是一点点超出份子的钱。</p>
+<p>我很怀疑，在经历了两三年的职场后，自己能做到像克勤这么好。</p>
+<h2 id="三"><a href="#三" class="headerlink" title="三"></a>三</h2><p>那晚在回家的路上，克勤说了很多在大学里的事。他喜欢上一个南邮的女生，到现在对南邮人都特别有好感；他从头到尾，学了三遍密码学，可是从来都没有用上。稀里糊涂学的调酒，却成了如今最受欢迎的技能。和我一样，他从来都不后悔，放弃的那些大学课程，我们很幸运，在最好的四年，做了自己最愿意做的事。</p>
+<p>你问我喝了这么多种酒，最喜欢哪一种？</p>
+<p>“我说所有的酒，都不如你。”</p>
 ]]></content>
     </entry>
     
