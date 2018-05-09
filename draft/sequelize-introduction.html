@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="0x00 序在最近这个博客项目中，使用了sequelize作为ORM框架，之前python的sqlalchemy也是搞得似懂非懂的，这里借机会仔细研究一下。
+0x01 上手安装sequelize目前支持mysql, sqlite, postgres, mssql四种数据库，安装sequelize后需要安装对应数据库的驱动：
+12npm install sequelize --savenpm ins">
+<meta name="keywords">
+<meta property="og:type" content="website">
+<meta property="og:title" content="sequelize基本教程">
+<meta property="og:url" content="http://blog.jerrywin.com/draft/sequelize-introduction.html">
+<meta property="og:site_name" content="/home/jerrypy">
+<meta property="og:description" content="0x00 序在最近这个博客项目中，使用了sequelize作为ORM框架，之前python的sqlalchemy也是搞得似懂非懂的，这里借机会仔细研究一下。
+0x01 上手安装sequelize目前支持mysql, sqlite, postgres, mssql四种数据库，安装sequelize后需要安装对应数据库的驱动：
+12npm install sequelize --savenpm ins">
+<meta property="og:updated_time" content="2018-05-09T03:07:08.045Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="sequelize基本教程">
+<meta name="twitter:description" content="0x00 序在最近这个博客项目中，使用了sequelize作为ORM框架，之前python的sqlalchemy也是搞得似懂非懂的，这里借机会仔细研究一下。
+0x01 上手安装sequelize目前支持mysql, sqlite, postgres, mssql四种数据库，安装sequelize后需要安装对应数据库的驱动：
+12npm install sequelize --savenpm ins">
+    
+    
+        <link rel="icon" type="image/png" href="/images/favicon.png" sizes="32x32" />
+    
+    <!-- title -->
+    <title>sequelize基本教程</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/lib/meslo-LG/styles.css">
+    <link rel="stylesheet" href="/lib/justified-gallery/justifiedGallery.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- rss -->
+    
+    
+    <!-- jquery -->
+    <script src="/lib/jquery/jquery.min.js"></script>
+</head>
+
+<body>
+    <div class="content index width mx-auto px2 my4">
+  <header id="header">
+    <a href="/">
+        <div class="logo"></div>
+        <div id="title">
+          <h1>
+              /home/jerrypy
+          </h1>
+          
+          <h2>
+              sequelize基本教程
+          </h2>
+          
+        </div>
+    </a>
+</header>
+
+  <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+
+    <div class="content" itemprop="articleBody">
+      <h1 id="0x00-序"><a href="#0x00-序" class="headerlink" title="0x00 序"></a>0x00 序</h1><p>在最近这个<a href="https://github.com/jerrypy/pieces" target="_blank" rel="external">博客项目</a>中，使用了sequelize作为ORM框架，之前python的sqlalchemy也是搞得似懂非懂的，这里借机会仔细研究一下。</p>
+<h1 id="0x01-上手"><a href="#0x01-上手" class="headerlink" title="0x01 上手"></a>0x01 上手</h1><h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>sequelize目前支持mysql, sqlite, postgres, mssql四种数据库，安装sequelize后需要安装对应数据库的驱动：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">npm install sequelize --save</div><div class="line">npm install mysql2 --save  # 这里使用mysql作为数据库，安装对应驱动</div></pre></td></tr></table></figure>
+<h2 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h2><p>sequelize构造函数接受4个参数：数据库名、用户名、密码、配置对象，在这个对象里可以设置数据库连接池等其它配置。sequelize默认会创建一个最大为5个连接的连接池，默认一个连接如果持续10000毫秒保持空闲状态则会释放该连接。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> Sequelize <span class="keyword">from</span> <span class="string">'sequelize'</span>;</div><div class="line"></div><div class="line"><span class="keyword">const</span> sequelize = <span class="keyword">new</span> Sequelize(<span class="string">'database'</span>, <span class="string">'username'</span>, <span class="string">'password'</span>, &#123;</div><div class="line">    dialect: <span class="string">'mysql'</span> <span class="comment">// dialect一定要显示地申明</span></div><div class="line">&#125;);</div><div class="line"></div><div class="line"><span class="comment">// sequelize构造函数也支持数据库uri连接的方式</span></div><div class="line"><span class="keyword">const</span> sequelize = <span class="keyword">new</span> Sequelize(<span class="string">'postgres://user:pass@example.com:5432/dbname'</span>);</div></pre></td></tr></table></figure>
+<p>初始化完成之后，我们可以<strong>测试一下连接：</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">sequelize</div><div class="line">  .authenticate()</div><div class="line">  .then(() =&gt; &#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'Connection has been established successfully.'</span>);</div><div class="line">  &#125;)</div><div class="line">  .catch(err =&gt; &#123;</div><div class="line">    <span class="built_in">console</span>.error(<span class="string">'Unable to connect to the database:'</span>, err);</div><div class="line">  &#125;);</div></pre></td></tr></table></figure>
+<h1 id="0x02-定义Model"><a href="#0x02-定义Model" class="headerlink" title="0x02 定义Model"></a>0x02 定义Model</h1><p><code>ORM</code>（Object Relational Mapping）对象关系映射，就是把数据库的一张表在代码中用一个对象来表示，把对表的增删改查都抽象成了对象的方法。有了<code>ORM</code>，开发者不需要再在代码中写原生的sql语句，以面相对象的思维方式来操作数据库。</p>
+<p>我们来定义一个最简单的Model:</p>
+<blockquote>
+<p>api用法：<code>define(modelName: String, attributes: Object, options: Object): Model</code><br>第一个参数是模型名：即在实际数据库创建的表名，第二个参数是表的字段及属性定义，第三个参数是一些配置，返回值是一个sequelize模型对象</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> Project = sequelize.define(<span class="string">'project'</span>, &#123;</div><div class="line">  title: &#123;</div><div class="line">    type: Sequelize.STRING,</div><div class="line">    allowNull: <span class="literal">false</span></div><div class="line">  &#125;,</div><div class="line">  description: &#123;</div><div class="line">    type: Sequelize.TEXT,</div><div class="line">    allowNull: <span class="literal">false</span></div><div class="line">  &#125;)</div></pre></td></tr></table></figure>
+<p>下面我们把改动同步到数据库来创建这个表：</p>
+<p><code>sequelize.sync()</code>(可以加上sequelize.sync({force: true})，如果表存在就先drop)</p>
+<p>控制台会输出log，打印执行的sql语句：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Executing (default): <span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="keyword">IF</span> <span class="keyword">NOT</span> <span class="keyword">EXISTS</span> <span class="string">`projects`</span> (<span class="string">`id`</span> <span class="built_in">INTEGER</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> auto_increment , <span class="string">`title`</span> <span class="built_in">VARCHAR</span>(<span class="number">255</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>, <span class="string">`description`</span> <span class="built_in">TEXT</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>, <span class="string">`createdAt`</span> DATETIME <span class="keyword">NOT</span> <span class="literal">NULL</span>, <span class="string">`updatedAt`</span> DATETIME <span class="keyword">NOT</span> <span class="literal">NULL</span>, PRIMARY <span class="keyword">KEY</span> (<span class="string">`id`</span>)) <span class="keyword">ENGINE</span>=<span class="keyword">InnoDB</span>;</div><div class="line">Executing (default): <span class="keyword">SHOW</span> <span class="keyword">INDEX</span> <span class="keyword">FROM</span> <span class="string">`projects`</span></div></pre></td></tr></table></figure>
+<p>日志会默认使用console.log来输出，可以在初始化的时候设置<code>options.logging = false</code>来关闭日志输出，也可以指定logging方法来自定义输出。</p>
+<p>可以看到，sequelize不仅创建了我们定义的两个字段<code>title</code>和<code>description</code>，还自动创建了一个自增主键<code>id</code>，还有两个个timestamp字段，这些行为在<code>define</code>的第三个参数中都可以进行配置。</p>
+<h2 id="重构"><a href="#重构" class="headerlink" title="重构"></a>重构</h2><p>在这个教程里，我们以编写一个博客为例，项目结构和模型定义都会以写一个博客为目标。所以我们希望把不同的模型定义放在不同的文件里，这些定义都放在一个叫models文件夹中，所以现在我们的项目目录结构大致是下面这样的：</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">.</div><div class="line">├── package<span class="selector-class">.json</span></div><div class="line">├── src</div><div class="line">│   ├── index<span class="selector-class">.js</span></div><div class="line">│   └── models</div><div class="line">│       ├── index<span class="selector-class">.js</span></div><div class="line">│       ├── post<span class="selector-class">.js</span></div><div class="line">│       ├── tag<span class="selector-class">.js</span></div><div class="line">│       └── user<span class="selector-class">.js</span></div><div class="line">└── start<span class="selector-class">.js</span> <span class="comment">// 这个入口引入了babel-register，不需要每次手动编译</span></div></pre></td></tr></table></figure>
+<p>我们希望在src入口<code>index.js</code>中导入一个<code>db</code>，即可对数据库对象进行操作，这里我们把所有的模型都放在了<code>db</code>对象中：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> db <span class="keyword">from</span> <span class="string">'./models/index'</span></div></pre></td></tr></table></figure>
+<p>那么所有的model定义都要在<code>models/index.js</code>中聚合：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 初始化</span></div><div class="line"><span class="keyword">const</span> sequelize = <span class="keyword">new</span> Sequelize(</div><div class="line">                        db_config.DATABASE, </div><div class="line">                        db_config.USERNAME, </div><div class="line">                        db_config.PASSWORD, </div><div class="line">                        db_config);</div><div class="line"></div><div class="line"><span class="keyword">const</span> db = &#123;&#125;;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 读取当前文件夹（models）下除index.js外所有的model定义文件，并使用import导入</div><div class="line"> * model都保存到db中</div><div class="line"> */</div><div class="line">fs</div><div class="line">    .readdirSync(__dirname)</div><div class="line">    .filter(file =&gt; &#123;</div><div class="line">        <span class="keyword">return</span> (file.indexOf(<span class="string">'.'</span>) !== <span class="number">0</span>) &amp;&amp; (file !== <span class="string">'index.js'</span>);</div><div class="line">    &#125;)</div><div class="line">    .forEach(file =&gt; &#123;</div><div class="line">        <span class="keyword">let</span> model = sequelize.import(path.join(__dirname, file));</div><div class="line">        db[model.name] = model;</div><div class="line">    &#125;);</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 建立模型间的关系</div><div class="line"> */</div><div class="line"><span class="built_in">Object</span>.keys(db).forEach(moduleName =&gt; &#123;</div><div class="line">    <span class="keyword">if</span> (<span class="string">'associate'</span> <span class="keyword">in</span> db[moduleName]) &#123;</div><div class="line">        db[moduleName].associate(db);</div><div class="line">    &#125;</div><div class="line">&#125;);</div><div class="line"></div><div class="line"><span class="built_in">module</span>.exports = db;</div></pre></td></tr></table></figure>
+<p>为了不一行一行地写导入Model的代码，我们这里用了<code>sequelize.import()</code>来“一键”导入所有Model，<code>import</code>接收的模块里Model的定义方式和之前稍有不同：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">module</span>.exports = (sequelize, DataTypes) =&gt; &#123;</div><div class="line">  <span class="keyword">return</span> sequelize.define(<span class="string">"project"</span>, &#123;</div><div class="line">    name: DataTypes.STRING,</div><div class="line">    description: DataTypes.TEXT</div><div class="line">  &#125;)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><code>import</code>会传递两个参数到模块里，第一个是sequelize示例，第二个是<a href="http://docs.sequelizejs.com/manual/tutorial/models-definition.html#data-types" target="_blank" rel="external">数据类型集</a>，而Model模块export的是一个函数，返回值是一个Model。</p>
+<h2 id="深入define"><a href="#深入define" class="headerlink" title="深入define"></a>深入define</h2><blockquote>
+<p>注：attribute和option的配置详细列表可以看<a href="http://docs.sequelizejs.com/class/lib/model.js~Model.html#static-method-init" target="_blank" rel="external">这里</a>。</p>
+</blockquote>
+<p>下面我们来编写用户模型：<code>user.js</code>:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">module</span>.exports = (sequelize, DataTypes) =&gt; &#123;</div><div class="line">    <span class="keyword">let</span> User =  sequelize.define(<span class="string">'user'</span>, &#123;</div><div class="line">        <span class="comment">// 用户名</span></div><div class="line">        username: &#123;</div><div class="line">            type: DataTypes.STRING,</div><div class="line">            allowNull: <span class="literal">false</span>,</div><div class="line">            validate: &#123;</div><div class="line">                notEmpty: <span class="literal">true</span>,</div><div class="line">                is: [<span class="string">'^([a-zA-Z0-9]|[_])&#123;4,16&#125;$'</span>, <span class="string">'gi'</span>]</div><div class="line">            &#125;</div><div class="line">        &#125;,</div><div class="line"></div><div class="line">        <span class="comment">// 密码哈希</span></div><div class="line">        password: &#123;</div><div class="line">            type: DataTypes.STRING,</div><div class="line">            allowNull: <span class="literal">false</span>,</div><div class="line">            validate: &#123;</div><div class="line">                notEmpty: <span class="literal">true</span></div><div class="line">            &#125;</div><div class="line">        &#125;,</div><div class="line"></div><div class="line">        <span class="comment">// 用户邮箱地址</span></div><div class="line">        email: &#123;</div><div class="line">            type: DataTypes.STRING,</div><div class="line">            validate: &#123;</div><div class="line">                notEmpty: <span class="literal">true</span>,</div><div class="line">                isEmail: <span class="literal">true</span></div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;, &#123;</div><div class="line">        paranoid: <span class="literal">true</span>,</div><div class="line"></div><div class="line">        underscored: <span class="literal">true</span>,</div><div class="line"></div><div class="line">        setterMethods: &#123;</div><div class="line"></div><div class="line">            <span class="comment">/**</span></div><div class="line">             * 密码哈希的setter函数，输入明文密码，保存哈希值在数据库中</div><div class="line">             * @param &#123;string&#125; pass </div><div class="line">             */</div><div class="line">            password(pass) &#123;</div><div class="line"></div><div class="line">                <span class="comment">// TODO 计算密码哈希</span></div><div class="line">                <span class="keyword">const</span> hash = crypto.createHash(<span class="string">'md5'</span>);</div><div class="line">                hash.update(pass);</div><div class="line">                <span class="keyword">this</span>.setDataValue(<span class="string">'password'</span>, hash.digest(<span class="string">'hex'</span>));</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;);</div><div class="line"></div><div class="line">    <span class="keyword">return</span> User;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p>现在<code>User</code>只定义了3个字段：用户名、密码哈希和邮箱地址，我们希望创建用户时，输入密码明文，但在数据库里保存的是密码的哈希值，所以这里在<code>options</code>里的<code>setterMethods</code>里定义了<code>password</code>的<code>setter</code>方法，当我们新建一条记录时(在src/index.js中)：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">sequelize.sync(&#123;force: <span class="literal">true</span>&#125;).then(() =&gt; &#123;</div><div class="line">    db[<span class="string">'user'</span>]</div><div class="line">        .create(&#123;username: <span class="string">'jerrypy'</span>, password: <span class="string">'password'</span>&#125;)</div><div class="line">        .then(user =&gt; &#123;</div><div class="line">            <span class="built_in">console</span>.log(user.get(<span class="string">'password'</span>));</div><div class="line">        &#125;);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>会发现数据库中的password字段就变成了明文的md5值。</p>
+<h3 id="命名策略"><a href="#命名策略" class="headerlink" title="命名策略"></a>命名策略</h3><p><code>define</code>的第一个参数是Model的名字，sequelize会根据这个名字来在确定数据库中建立表的名字以及在魔性关联中建立对应的方法和属性。</p>
+<p>比如：一个Model的名字是<code>user</code>，sequelize会在与其相关联的其他Model实例中增加名为<code>[get|set|add]User</code>的方法，而<code>eager loading</code>时会增加一个名为<code>user</code>的属性；而一个名字是<code>User</code>的Model，sequelize同样会在相关联的其他Model增加<code>[get|set|add]User</code>方法，但是会增加名为<code>User</code>的属性（注意这里是大写了）。</p>
+<p>在下面会介绍的，直接利用关系来创建条目时，用到的也是这个名字，所以这里建议<strong>名字使用小写的英文单数形式</strong>。(sequelize会自动利用<code>inflection</code>库把名字转为复数，具体见<a href="http://docs.sequelizejs.com/manual/tutorial/associations.html#naming-strategy" target="_blank" rel="external">这里</a>)</p>
+<blockquote>
+<p>一对多关系的时候，只有set,get方法，没有add方法，因为只可能对应一个，所以不需要add方法。！！</p>
+</blockquote>
+<h3 id="validators"><a href="#validators" class="headerlink" title="validators"></a>validators</h3><p>在上面<code>User</code>的attribute定义中，不仅仅有<code>type</code>和<code>allowNull</code>属性定义，还有一个<code>validate</code>字段，在这个字段里我们可以设置多个<code>validator</code>，在创建示例的时候，会检查每一个<code>validator</code>是否通过。（详细的内置validator列表见<a href="http://docs.sequelizejs.com/manual/tutorial/models-definition.html#validations" target="_blank" rel="external">这里</a>）</p>
+<h3 id="Configuration-选项"><a href="#Configuration-选项" class="headerlink" title="Configuration 选项"></a>Configuration 选项</h3><p><code>define</code>的第三个参数，就是在定义Model时的选项：</p>
+<ul>
+<li><code>timestamp</code>：如果为true，则自动加入<code>updateAt</code>和<code>createAt</code>字段</li>
+<li><code>paranoid</code>：如果为true，删除条目时，只是设置<code>deleteAt</code>字段为当前时间，需要<code>timestamp</code>设置为true</li>
+<li><code>underscore</code>：如果为true，自动加入的字段不适用驼峰命名法，而使用下划线分割：<code>update_at</code></li>
+</ul>
+<p>更多的选项列表见<a href="http://docs.sequelizejs.com/manual/tutorial/models-definition.html#configuration" target="_blank" rel="external">这里</a>。</p>
+<p>在sequelize初始化的时候，可以给所有Model加入默认选项，比如<code>timestamp</code>默认为false：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> sequelize = <span class="keyword">new</span> Sequelize(<span class="string">'databaseuri'</span>, &#123;</div><div class="line">    define: &#123;</div><div class="line">        timestamp: <span class="literal">false</span>;</div><div class="line">    &#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<h3 id="Getters-amp-Setters"><a href="#Getters-amp-Setters" class="headerlink" title="Getters &amp; Setters"></a>Getters &amp; Setters</h3><p>sequelize中还有一个有趣的用法，就是定义一个伪属性：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> Foo = sequelize.define(<span class="string">'foo'</span>, &#123;</div><div class="line">  firstname: Sequelize.STRING,</div><div class="line">  lastname: Sequelize.STRING</div><div class="line">&#125;, &#123;</div><div class="line">  getterMethods: &#123;</div><div class="line">    fullName() &#123;</div><div class="line">      <span class="keyword">return</span> <span class="keyword">this</span>.firstname + <span class="string">' '</span> + <span class="keyword">this</span>.lastname</div><div class="line">    &#125;</div><div class="line">  &#125;,</div><div class="line"></div><div class="line">  setterMethods: &#123;</div><div class="line">    fullName(value) &#123;</div><div class="line">      <span class="keyword">const</span> names = value.split(<span class="string">' '</span>);</div><div class="line"></div><div class="line">      <span class="keyword">this</span>.setDataValue(<span class="string">'firstname'</span>, names.slice(<span class="number">0</span>, <span class="number">-1</span>).join(<span class="string">' '</span>));</div><div class="line">      <span class="keyword">this</span>.setDataValue(<span class="string">'lastname'</span>, names.slice(<span class="number">-1</span>).join(<span class="string">' '</span>));</div><div class="line">    &#125;,</div><div class="line">  &#125;</div><div class="line">&#125;);</div><div class="line"></div><div class="line">Foo.create(&#123;fullName: <span class="string">'Jiang Jie'</span>&#125;).then(user =&gt; &#123;</div><div class="line">    <span class="built_in">console</span>.log(user.get(<span class="string">'firstname'</span>)); <span class="comment">// Jiang</span></div><div class="line">    <span class="built_in">console</span>.log(user.get(<span class="string">'lastname'</span>)); <span class="comment">// Jie</span></div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<p>可以看到上面的代码利用<code>setter</code>方法定义了一个<code>fullName</code>属性，我们直接在<code>create</code>的时候用这个属性名来赋值。</p>
+<h1 id="0x03-关系"><a href="#0x03-关系" class="headerlink" title="0x03 关系"></a>0x03 关系</h1><blockquote>
+<p>约定： 当我们执行<code>User.hasOne(Project)</code>的时候，我们称<code>User</code>是源（source），<code>Project</code>是目标（target）。</p>
+</blockquote>
+<h2 id="1-1-一对一"><a href="#1-1-一对一" class="headerlink" title="1:1 一对一"></a>1:1 一对一</h2><h3 id="belongsTo"><a href="#belongsTo" class="headerlink" title="belongsTo"></a>belongsTo</h3><p><code>belongsTo</code>会在<strong>源</strong>Model里建立一个外键：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> Player = <span class="keyword">this</span>.sequelize.define(<span class="string">'player'</span>, &#123;<span class="comment">/* attributes */</span>&#125;);</div><div class="line"><span class="keyword">const</span> Team  = <span class="keyword">this</span>.sequelize.define(<span class="string">'team'</span>, &#123;<span class="comment">/* attributes */</span>&#125;);</div><div class="line"></div><div class="line">Player.belongsTo(Team); <span class="comment">// 会在Player中添加一个teamId外键，指向Team的主键</span></div></pre></td></tr></table></figure>
+<p>如果在源Model的<code>define</code>里设置了<code>underscored</code>为true，那么自动添加的外键名就是<code>team_id</code>。默认的外键名可以通过设置<code>foreignKey</code>来指定：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> User = <span class="keyword">this</span>.sequelize.define(<span class="string">'user'</span>, &#123;<span class="comment">/* attributes */</span>&#125;)</div><div class="line"><span class="keyword">const</span> Company  = <span class="keyword">this</span>.sequelize.define(<span class="string">'company'</span>, &#123;<span class="comment">/* attributes */</span>&#125;);</div><div class="line"></div><div class="line">User.belongsTo(Company, &#123;foreignKey: <span class="string">'fk_company'</span>&#125;); <span class="comment">// Adds fk_company to User</span></div></pre></td></tr></table></figure>
+<p>一般情况下，源Model中的外键指向的是目标Model的主键，我们也可以通过设置<code>targetKey</code>来指定其他的列：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> User = <span class="keyword">this</span>.sequelize.define(<span class="string">'user'</span>, &#123;<span class="comment">/* attributes */</span>&#125;)</div><div class="line"><span class="keyword">const</span> Company  = <span class="keyword">this</span>.sequelize.define(<span class="string">'company'</span>, &#123;<span class="comment">/* attributes */</span>&#125;);</div><div class="line"></div><div class="line">User.belongsTo(Company, &#123;foreignKey: <span class="string">'fk_companyname'</span>, targetKey: <span class="string">'name'</span>&#125;);</div><div class="line"><span class="comment">// 本来fk_companyname指向的是Company.id ，现在是Company.name</span></div></pre></td></tr></table></figure>
+<h3 id="hasOne"><a href="#hasOne" class="headerlink" title="hasOne"></a>hasOne</h3><p><code>hasOne</code>会在<strong>目标</strong>Model设置一个外键：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> User = sequelize.define(<span class="string">'user'</span>, &#123;<span class="comment">/* ... */</span>&#125;)</div><div class="line"><span class="keyword">const</span> Project = sequelize.define(<span class="string">'project'</span>, &#123;<span class="comment">/* ... */</span>&#125;)</div><div class="line"></div><div class="line">Project.hasOne(User) <span class="comment">// 会在User中添加一个projectId的外键，指向Project的主键</span></div></pre></td></tr></table></figure>
+<h2 id="1-n-一对多"><a href="#1-n-一对多" class="headerlink" title="1:n 一对多"></a>1:n 一对多</h2><h2 id="n-m"><a href="#n-m" class="headerlink" title="n:m"></a>n:m</h2><h3 id="belongsToMany"><a href="#belongsToMany" class="headerlink" title="belongsToMany"></a>belongsToMany</h3><h1 id="0x04-CRUD"><a href="#0x04-CRUD" class="headerlink" title="0x04 CRUD"></a>0x04 CRUD</h1><h2 id="scopes"><a href="#scopes" class="headerlink" title="scopes"></a>scopes</h2><h2 id="hooks"><a href="#hooks" class="headerlink" title="hooks"></a>hooks</h2>
+    </div>
+  </article>
+</div>
+
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2018 /home/jerrypy
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/archives">Writing</a></li>
+        <li><a href="/about">About</a></li>
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    <script src="/lib/justified-gallery/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- Google Analytics -->
+
+<!-- Disqus Comments -->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'home-jerrypy';
+
+        (function(){
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        }());
+    </script>
+
+
+<!-- 百度统计代码 -->
+<script>
+var _hmt = _hmt || [];
+(function() {
+   var hm = document.createElement("script");
+     hm.src = "https://hm.baidu.com/hm.js?ec6f803d26e3885c9a8eb87ca36f0560";
+       var s = document.getElementsByTagName("script")[0]; 
+         s.parentNode.insertBefore(hm, s);
+         })();
+</script>
+
+
+</body>
+</html>

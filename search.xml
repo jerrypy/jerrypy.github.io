@@ -4,6 +4,35 @@
   
     
     <entry>
+      <title><![CDATA[那些谦卑的年轻人]]></title>
+      <url>http://blog.jerrywin.com/2018/05/04/humble-young-bloods/</url>
+      <content type="html"><![CDATA[<p><img src="http://static.jerrywin.com/blog/img/young-bloods.png" alt="young bloods"></p>
+<p>“我生于一个标准意义上的北京中产阶层家庭，有北京户口，家人在北京有房。敲出这行字时我感到十分愧疚与不安，因为这行字里包含了绝大多数中国人奋斗一生都未必能得到的东西，而我居然一出生就拥有。”</p>
+<p>作为一个出生于五线城市工薪阶层家庭的人，读到这位近期知名的燕园学子岳同学的文章时，居然会有一种强烈的感同身受。</p>
+<p>因为是独子且父亲有单位的原因，我从小就享受比堂兄妹更多的来自长辈的溺爱，享受城镇的教育资源。而作为一个既得利益者，能勉强算是没有辜负这些占有的资源：考上大学，步入社会后，收入能达到中产标准。同样的“愧疚”时常出现在和亲戚们本就不多的接触中，总会有一种感觉：我现在能负担的起的，都来自于那些被我“吃掉”的资源。</p>
+<p>而真正令我感到“不安”的，是思想上的隔阂。</p>
+<hr>
+<p>相信你应该也听到过其他人“读书没什么用”的论调，还是混个公职或者嫁个有钱人来的实在。<br>我从不歧视这种观念，因为曾经我一度也认为，学校并没有那么大的好坏之分，上大学和不上大学也没有那么大的好坏之分，这是以五十步笑百步。</p>
+<p>我的大学并没有让我改变这个认知。来自学校，听到的大多数是制度内套路化的官腔；来自同学，感受到的大多数是父母老师帮着报的专业或是被调剂专业后的迷惘。我愚蠢地以为，其他好一点的大学，也好不到哪里去吧。所以，如果你真的够努力，有没有这么样一个大学校园的环境其实并没有那么重要。</p>
+<p>这里要感谢github，让我看见了这个<a href="https://sikaozhe1997.github.io/Xin-Yue/" target="_blank" rel="external">repo</a>。让我知道我对大学的误解，仅仅是因为我的孤陋寡闻，而并非事实如此。通过岳同学的信，了解了这次事件的始末（你可能说这会导致偏见，我也这么认为，但从这次事件的另外一方，我没有办法获取到任何有用的信息）。</p>
+<p>我辈最优秀的青年已经学会用一种现代公民的姿态，诉诸法律条例，维护自身利益！<br>我辈最优秀的青年面对权力不对等的境况，敢于群起而上，奋力反抗！<br>我辈最优秀的青年从来没有忘记五四风雷，用铿锵的文字，警醒世人！</p>
+<p>我想起了《死亡诗社》里，大家站上课桌，朗诵着：“O! Captain! My Captain!”；我想起了某本书中提到那些年复旦的毕业季，大家用三轮车拉着钢琴在校园里通宵演奏。</p>
+<p>这是我印象中大学该有的样子。</p>
+<hr>
+<p>“传承火炬的人从不曾缺失，只是监管火炬的人早不是当年那些看着它燃起的人。”</p>
+<p>他们用叫家长来侮辱你理性而独立的人格；他们用“可能受jing外势力指使”来践踏你的社会责任感；他们威胁你能否“顺利毕业”……</p>
+<p>“这到底是谁和谁的斗争？”</p>
+<p><img src="http://static.jerrywin.com/blog/img/xinyue.jpg" alt="xinyue"></p>
+<hr>
+<p>总有人劝你放弃。</p>
+<p>劝你别再谈什么理想，家里开个奶茶店、包个工程能赚的更多；劝你太过劳累，回来有个照应；劝你被现实冲昏了头，忘了自己。</p>
+<p>我不想只因为再找一些同路者，就来劝你和我一起坚持，那样和其他人也没有什么区别。我也不知道这到底是对的还是错的，我只知道有些人注定要这么走下去。</p>
+<p>Young bloods,<br>be humble,<br>stay young.</p>
+<p>2018.5.4</p>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[Javascript变量声明]]></title>
       <url>http://blog.jerrywin.com/2017/10/17/javascript-variable-declaration/</url>
       <content type="html"><![CDATA[<p>Javascript社区为了和其它语言保持统一，使用了<a href="https://stackoverflow.com/questions/37916940/why-was-the-name-let-chosen-for-block-scoped-variable-declarations-in-javascri" target="_blank" rel="external"><code>let</code></a>作为新的变量声明关键字。到ECMAScript 2017为止，Javascript中一共有6种声明变量的关键字：<code>var</code>, <code>let</code>, <code>const</code>, <code>function</code>, <code>class</code>, <code>import</code>。本文旨在记录在学习ES6第一部分–变量声明中的一些疑惑。</p>

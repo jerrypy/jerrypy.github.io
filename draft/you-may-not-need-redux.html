@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="local state  示例内部的state  成员
+原文：https://medium.com/@dan_abramov/you-might-not-need-redux-be46360cf367
+人们往往在确认自己是否需要Redux之前就选择去使用它。
+“如果我们的应用不使用Redux无法获得很好的扩展性呢？” – 但是之后开发者又会对着Redux引入的迂回的代码皱起眉头；“为什么我们需要新">
+<meta name="keywords">
+<meta property="og:type" content="website">
+<meta property="og:title" content="You Might Not Need Redux">
+<meta property="og:url" content="http://blog.jerrywin.com/draft/you-may-not-need-redux.html">
+<meta property="og:site_name" content="/home/jerrypy">
+<meta property="og:description" content="local state  示例内部的state  成员
+原文：https://medium.com/@dan_abramov/you-might-not-need-redux-be46360cf367
+人们往往在确认自己是否需要Redux之前就选择去使用它。
+“如果我们的应用不使用Redux无法获得很好的扩展性呢？” – 但是之后开发者又会对着Redux引入的迂回的代码皱起眉头；“为什么我们需要新">
+<meta property="og:updated_time" content="2017-11-02T09:54:50.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="You Might Not Need Redux">
+<meta name="twitter:description" content="local state  示例内部的state  成员
+原文：https://medium.com/@dan_abramov/you-might-not-need-redux-be46360cf367
+人们往往在确认自己是否需要Redux之前就选择去使用它。
+“如果我们的应用不使用Redux无法获得很好的扩展性呢？” – 但是之后开发者又会对着Redux引入的迂回的代码皱起眉头；“为什么我们需要新">
+    
+    
+        <link rel="icon" type="image/png" href="/images/favicon.png" sizes="32x32" />
+    
+    <!-- title -->
+    <title>You Might Not Need Redux</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/lib/meslo-LG/styles.css">
+    <link rel="stylesheet" href="/lib/justified-gallery/justifiedGallery.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- rss -->
+    
+    
+    <!-- jquery -->
+    <script src="/lib/jquery/jquery.min.js"></script>
+</head>
+
+<body>
+    <div class="content index width mx-auto px2 my4">
+  <header id="header">
+    <a href="/">
+        <div class="logo"></div>
+        <div id="title">
+          <h1>
+              /home/jerrypy
+          </h1>
+          
+          <h2>
+              You Might Not Need Redux
+          </h2>
+          
+        </div>
+    </a>
+</header>
+
+  <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+
+    <div class="content" itemprop="articleBody">
+      <p>local state  示例内部的state  成员</p>
+<p><strong>原文：<a href="https://medium.com/@dan_abramov/you-might-not-need-redux-be46360cf367" target="_blank" rel="external">https://medium.com/@dan_abramov/you-might-not-need-redux-be46360cf367</a></strong></p>
+<p>人们往往在确认自己是否需要Redux之前就选择去使用它。</p>
+<p>“如果我们的应用不使用Redux无法获得很好的扩展性呢？” – 但是之后开发者又会对着Redux引入的迂回的代码皱起眉头；“为什么我们需要新建三个文件来实现一个简单的功能？” – 到底是为什么呢！</p>
+<p>人们因为他们的痛苦去责怪Redux、React、函数式编程、不变性还有很多其它的东西，我能理解。把Redux和其它不需要“脚手架”代码来更新state的方法来比较并得出Redux仅仅是很复杂的结论是很正常的。从某个角度来说，它的确很复杂，而且是被有意设计成这样。</p>
+<p>Redux提供了一个权衡的方法，</p>
+<ul>
+<li>用纯对象或者数组来描述state</li>
+<li>用纯对象来描述系统中的改变</li>
+<li>用纯函数来处理改变的逻辑</li>
+</ul>
+<blockquote>
+<p>纯对象：<br>纯函数：不修改输入</p>
+</blockquote>
+<p>不管使不使用React来构建一个应用，上面这些限制都不是必须得。实际上这些是非常强的约束，即使是在应用中部分使用之前你也应该考虑清楚。</p>
+<p>这么做的话，你是否有足够充分的理由？</p>
+<p>这些约束很吸引我的原因是，它们能帮助我构建的应用获得如下好处：</p>
+<ul>
+<li><a href="https://egghead.io/lessons/javascript-redux-persisting-the-state-to-the-local-storage?course=building-react-applications-with-idiomatic-redux" target="_blank" rel="external">把state持久化在本地存储中，能直接从存储的结果开始，开箱即用</a></li>
+<li><a href="http://redux.js.org/docs/recipes/ServerRendering.html" target="_blank" rel="external">在服务器端预填充state，在HTML中发送给客户端，开箱即用</a></li>
+<li><a href="https://github.com/dtschust/redux-bug-reporter" target="_blank" rel="external">序列化用户的action，并和state快照绑定起来，自动化地上报bug，开发者可以根据这些来复现bug</a></li>
+<li><a href="https://github.com/philholden/redux-swarmlog" target="_blank" rel="external">通过网络传输action对象来实现协同环境，而不需要戏剧化地修改代码</a></li>
+<li><a href="http://redux.js.org/docs/recipes/ImplementingUndoHistory.html" target="_blank" rel="external">维护一个操作历史或者实现Optimistic Mutations，而不需要戏剧化地修改代码</a></li>
+<li><a href="https://github.com/gaearon/redux-devtools" target="_blank" rel="external">在开发中任意恢复state的历史状态，还可根据action历史来重新计算当前state</a></li>
+<li><a href="https://github.com/romseguy/redux-devtools-chart-monitor" target="_blank" rel="external">为开发工具提供完整的检验和控制，开发者可以为他们的应用定制各种工具</a></li>
+<li><a href="https://youtu.be/gvVpSezT5_M?t=11m51s" target="_blank" rel="external">复用绝大部分的逻辑代码即可更换UI</a></li>
+</ul>
+<p>如果你正在开发一个<a href="https://hyperterm.org/" target="_blank" rel="external">可扩展的终端</a>，一个<a href="https://hacks.mozilla.org/2016/09/introducing-debugger-html/" target="_blank" rel="external">Javascript调试器</a>或者是其它的一些<a href="https://twitter.com/necolas/status/727538799966715904" target="_blank" rel="external">网页应用</a>，那么值得试一试Redux，至少考虑一下Redux的一些开发理念（顺便提一句，它们<a href="https://github.com/evancz/elm-architecture-tutorial" target="_blank" rel="external">不是</a><a href="https://github.com/omcljs/om" target="_blank" rel="external">新的</a>！）</p>
+<p>但是，如果你才刚开始学习React，不要让Redux成为你的第一个选择。</p>
+<p>你应该先去学习官方教程里的<a href="https://facebook.github.io/react/docs/thinking-in-react.html" target="_blank" rel="external">Think in React</a>。之后如果你真的有需求再来考虑Redux，或者你想尝试一些新的东西。使用它的时候应该要小心一点，就像使用其它可要可不要的工具。</p>
+<p>如果用Redux开发的时候你感到很有压力，那么可能这代表了你或者你的团队太看重Redux了。它毕竟只是很多工具中的一种，一个<a href="https://www.youtube.com/watch?v=uvAXVMwHJXU" target="_blank" rel="external">疯狂</a>的<a href="https://www.youtube.com/watch?v=xsSnOQynTHs" target="_blank" rel="external">实验</a>。</p>
+<p>最后，你可以仅仅使用一些Redux的理念，而不是非要用Redux这个框架。比如，一个带有本地state的React组件：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">import</span> React, &#123; Component &#125; <span class="keyword">from</span> <span class="string">'react'</span>;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Counter</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</div><div class="line">  state = &#123; value: <span class="number">0</span> &#125;;</div><div class="line"></div><div class="line">  increment = () =&gt; &#123;</div><div class="line">    <span class="keyword">this</span>.setState(prevState =&gt; (&#123;</div><div class="line">      value: prevState.value + <span class="number">1</span></div><div class="line">    &#125;));</div><div class="line">  &#125;;</div><div class="line"></div><div class="line">  decrement = () =&gt; &#123;</div><div class="line">    <span class="keyword">this</span>.setState(prevState =&gt; (&#123;</div><div class="line">      value: prevState.value - <span class="number">1</span></div><div class="line">    &#125;));</div><div class="line">  &#125;;</div><div class="line">  </div><div class="line">  render() &#123;</div><div class="line">    <span class="keyword">return</span> (</div><div class="line">      <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></div><div class="line">        &#123;this.state.value&#125;</div><div class="line">        <span class="tag">&lt;<span class="name">button</span> <span class="attr">onClick</span>=<span class="string">&#123;this.increment&#125;</span>&gt;</span>+<span class="tag">&lt;/<span class="name">button</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">button</span> <span class="attr">onClick</span>=<span class="string">&#123;this.decrement&#125;</span>&gt;</span>-<span class="tag">&lt;/<span class="name">button</span>&gt;</span></div><div class="line">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    )</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>It is perfectly fine as it is. Seriously, it bears repeating.</p>
+<p>Local state is fine.</p>
+<p>Redux提供  增加了 为了解耦“发生了什么”和“怎么发生的”。</p>
+<p>这是一个最优选择？并不是，这只是一个权衡。</p>
+<p>比如，我们能从组件中分解一个reducer出来：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> React, &#123; Component &#125; <span class="keyword">from</span> <span class="string">'react'</span>;</div><div class="line"></div><div class="line"><span class="keyword">const</span> counter = (state = &#123; value: <span class="number">0</span> &#125;, action) =&gt; &#123;</div><div class="line">  <span class="keyword">switch</span> (action.type) &#123;</div><div class="line">    <span class="keyword">case</span> <span class="string">'INCREMENT'</span>:</div><div class="line">      <span class="keyword">return</span> &#123; value: state.value + <span class="number">1</span> &#125;;</div><div class="line">    <span class="keyword">case</span> <span class="string">'DECREMENT'</span>:</div><div class="line">      <span class="keyword">return</span> &#123; value: state.value - <span class="number">1</span> &#125;;</div><div class="line">    <span class="keyword">default</span>:</div><div class="line">      <span class="keyword">return</span> state;</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Counter</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</div><div class="line">  state = counter(<span class="literal">undefined</span>, &#123;&#125;);</div><div class="line">  </div><div class="line">  dispatch(action) &#123;</div><div class="line">    <span class="keyword">this</span>.setState(prevState =&gt; counter(prevState, action));</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  increment = () =&gt; &#123;</div><div class="line">    <span class="keyword">this</span>.dispatch(&#123; type: <span class="string">'INCREMENT'</span> &#125;);</div><div class="line">  &#125;;</div><div class="line"></div><div class="line">  decrement = () =&gt; &#123;</div><div class="line">    <span class="keyword">this</span>.dispatch(&#123; type: <span class="string">'DECREMENT'</span> &#125;);</div><div class="line">  &#125;;</div><div class="line">  </div><div class="line">  render() &#123;</div><div class="line">    <span class="keyword">return</span> (</div><div class="line">      <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></div><div class="line">        &#123;this.state.value&#125;</div><div class="line">        <span class="tag">&lt;<span class="name">button</span> <span class="attr">onClick</span>=<span class="string">&#123;this.increment&#125;</span>&gt;</span>+<span class="tag">&lt;/<span class="name">button</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">button</span> <span class="attr">onClick</span>=<span class="string">&#123;this.decrement&#125;</span>&gt;</span>-<span class="tag">&lt;/<span class="name">button</span>&gt;</span></div><div class="line">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    )</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>注意这里我们没有用<em>npm install</em>就使用了Redux，哇！</p>
+<p>你是否应该对带有state的组件这么做？应该不用。 That is, not unless you have a plan to benefit from this additional indirection. Having a plan is, in the parlance of our times, the 🔑.</p>
+<p><a href="http://redux.js.org/" target="_blank" rel="external">Redux库</a>本身只是提供一些帮助函数来把reducers“挂载”到全局store对象上。你可以根据自己的喜好随意使用Redux。</p>
+<p>不过，在你做权衡的时候，确保在损失的同时得到了你更需要的东西。</p>
+
+    </div>
+  </article>
+</div>
+
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2018 /home/jerrypy
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/archives">Writing</a></li>
+        <li><a href="/about">About</a></li>
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    <script src="/lib/justified-gallery/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- Google Analytics -->
+
+<!-- Disqus Comments -->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'home-jerrypy';
+
+        (function(){
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        }());
+    </script>
+
+
+<!-- 百度统计代码 -->
+<script>
+var _hmt = _hmt || [];
+(function() {
+   var hm = document.createElement("script");
+     hm.src = "https://hm.baidu.com/hm.js?ec6f803d26e3885c9a8eb87ca36f0560";
+       var s = document.getElementsByTagName("script")[0]; 
+         s.parentNode.insertBefore(hm, s);
+         })();
+</script>
+
+
+</body>
+</html>
